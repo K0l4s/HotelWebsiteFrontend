@@ -10,10 +10,10 @@ const Navbar = () => {
       <button>Biểu giá dịch vụ</button>
       <button>Về chúng tôi</button>
       <button>Liên hệ</button>
+      </div>
       <div className="searchbox">
         <input type="text" placeholder="Tìm kiếm" />
         <img src="https://static-00.iconduck.com/assets.00/search-icon-2048x2048-zik280t3.png" alt="search_icon" />
-      </div>
       </div>
     </div>
   )

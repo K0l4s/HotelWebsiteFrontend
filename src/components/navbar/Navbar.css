@@ -23,11 +23,9 @@
 }
 
 .navbar .buttonGroup{
-    display: flex;
-    justify-content: space-around;
     align-items: center;
     padding: 0px 20px;
-    width: 80%;
+    margin-right: 50px;
 }
 
 .navbar .buttonGroup button{
@@ -47,6 +45,17 @@
 }
 
 .navbar .searchbox{
-    position: absolute;
-    right: 10px;
+    align-items: center;
+    display: flex;
+    position: relative;
+    width: 500px;
+}
+
+.navbar .searchbox img{
+    width: 20px;
+}
+
+.navbar .searchbox input{
+    width: 100%;
+    min-width: 10px;
 }
