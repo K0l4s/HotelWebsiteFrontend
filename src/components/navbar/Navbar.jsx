@@ -1,15 +1,23 @@
 import React, { useState } from 'react'
 import './Navbar.css'
+import { useNavigate } from 'react-router-dom'
+import { GoHome } from "react-icons/go";
+import { RiHotelLine } from "react-icons/ri";
+import { RiCustomerService2Fill } from "react-icons/ri";
+import { MdRoomService } from "react-icons/md";
+import { MdPermDeviceInformation } from "react-icons/md";
+
 const Navbar = () => {
+  const navigate = useNavigate();
   return (
     <div className='navbar'>
       <img className='logo' src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png" alt="logo" />
       <div className="buttonGroup">
-      <button>Trang chủ</button>
-      <button>Đặt phòng</button>
-      <button>Biểu giá dịch vụ</button>
-      <button>Về chúng tôi</button>
-      <button>Liên hệ</button>
+      <button onClick={()=>navigate('/')}><GoHome/> Trang chủ</button>
+      <button onClick={()=>navigate('booking')}> <RiHotelLine/> Đặt phòng</button>
+      <button onClick={()=>navigate('service')}> <MdRoomService/> Dịch vụ</button>
+      <button onClick={()=>navigate('about')}> <MdPermDeviceInformation/> Về chúng tôi</button>
+      <button onClick={()=>navigate('contact')}> <RiCustomerService2Fill/> Liên hệ</button>
       </div>
       <div className="searchbox">
         <input type="text" placeholder="Tìm kiếm" />
