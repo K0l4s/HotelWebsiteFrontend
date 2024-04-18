@@ -2,6 +2,8 @@
 
 body {
   transition: background-color 0.5s ease;
+  background-color: #000000;
+  color:#df5555;
 }
 
 .dark-mode {
@@ -69,4 +71,17 @@ input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
+}
+
+.fade{
+  animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

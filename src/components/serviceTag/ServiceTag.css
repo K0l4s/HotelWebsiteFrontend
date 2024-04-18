@@ -1,0 +1,90 @@
+.serviceTag{
+    width: 500px;
+    height: 150px;
+    background-color: #e9aeaed4;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+}
+.serviceTag:hover{
+    transform: scale(1.025);
+}
+
+.serviceTag .serviceTagTitle h2{
+    font-size: 1.5rem;
+    margin: 0;
+    color: #333;
+}
+
+.addOrder{
+    background-color: #f50057;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin:2px;
+}
+
+.backGroundImage img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+}
+.serviceTag .sContent{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+   
+}
+
+.serviceTag .sRight{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-right: 20px;
+    background-color: #f50057;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom:30px;
+    transition: all 0.3s;
+}
+
+.serviceTag:hover .sRight{
+    background-color: #000000;
+    
+}
+
+
+.serviceTag .detailBtn{
+    background-color: #f50057;
+    border: none;
+    border-radius: 10px;
+    width: 150px;
+    height: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: absolute;
+    right: 100px;
+    top: 10px;
+    margin:2px;
+}

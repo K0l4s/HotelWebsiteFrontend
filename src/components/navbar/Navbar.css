@@ -1,37 +1,49 @@
-.navbar{
-    background-color: rgba(0, 0, 0, 0.404);
+.navbar {
+    background-color: rgb(0, 125, 234);
     box-shadow: 0px 0px 10px rgba(94, 62, 62, 0.1);
-    position: fixed;
+    position: sticky;
     top: 0px;
     width: 100%;
-    height: auto;
+    min-width: 1280px;
+    height: 50px;
     z-index: 1000;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    animation: topToBottom 0.5s ease-in-out;
 }
 
-.navbar img{
+@keyframes topToBottom {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+.navbar img {
     width: 30px;
     height: auto;
 }
 
-.navbar .logo{
+.navbar .logo {
     position: absolute;
     left: 10px;
 }
 
-.navbar .buttonGroup{
+.navbar .buttonGroup {
     align-items: center;
     padding: 0px 10px;
     margin-left: 30px;
 }
 
-.navbar .buttonGroup button{
+.navbar .buttonGroup button {
     width: 150px;
     height: 50px;
-    background-color: transparent;
+    background: rgba(0, 0, 0, 0);
     border: none;
     outline: none;
     cursor: pointer;
@@ -39,38 +51,12 @@
     transition: all 0.5s ease-in-out;
 }
 
-.navbar .buttonGroup button:hover{
-    background-color: #292727;
-    color:#fff;
+.buttonGroup button.active {
+    background-color: rgb(0, 0, 0);
+    color: #ffffff;
 }
 
-.navbar .searchbox{
-    align-items: center;
-    display: flex;
-    position: relative;
-    width: 500px;
+.navbar .buttonGroup button:hover {
+    background-color: rgb(0, 0, 0);
+    color: #ffffff;
 }
-
-.navbar .searchbox img{
-    width: 20px;
-    position: absolute;
-    right: 10px;
-    transition: all ease-in-out 0.5s;
-}
-
-.navbar .searchbox img:hover{
-    transform: scale(1.5);
-    cursor: pointer;
-}
-
-.navbar .searchbox input{
-    position: absolute;
-    right: 0;
-    width: 50%;
-    min-width: 10px;
-    border-radius: 10px;
-    height: 20px;
-    border-style: none;
-    padding: 10px;
-}
-

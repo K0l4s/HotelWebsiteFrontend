@@ -1,0 +1,49 @@
+.contact{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact .box{
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    margin: 20px 0;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: auto;
+}
+
+.contact .box button{
+    width: 100%;
+    padding: auto;
+    margin: 10px 0;
+    background-color: #3c6fe7;
+    color: #f4f4f4;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.contact .box button:hover{
+    background-color: #7193e2;
+}
+
+.contact .box input, .contact .box textarea{
+    width: 500px;
+    height: 20px;
+    padding: 10px;
+    margin: 10px ;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact .box textarea{
+    height: 100px;
+}
+.sendBtn{
+    height: 50px;
+}

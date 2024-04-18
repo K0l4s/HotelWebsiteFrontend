@@ -1,0 +1,58 @@
+.service .serviceTagGroup {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.service{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.service h1{
+  text-align: center;
+}
+
+.service .showMore{
+  width: 200px;
+  height: 50px;
+  border-width: 0px;
+  background: black;
+  color:wheat;
+  margin: 10px;
+}
+.service .button{
+  display: flex;
+}
+.service .showMore:hover{
+  background: rgb(51, 51, 51);
+  cursor: pointer;
+}
+.service .searchbox{
+  align-items: center;
+  display: flex;
+  position: relative;
+  width: 1000px;
+}
+ 
+.service .searchbox img{
+  width: 20px;
+  position: absolute;
+  right: 10px;
+  transition: all ease-in-out 0.5s;
+}
+
+.service .searchbox img:hover{
+  transform: scale(1.5);
+  cursor: pointer;
+}
+
+.service .searchbox input{
+  width: 100%;
+  border-radius: 10px;
+  height: 20px;
+  border-style: solid;
+  padding: 10px;
+}
+
+

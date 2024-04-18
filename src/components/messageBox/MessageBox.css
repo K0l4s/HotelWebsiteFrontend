@@ -1,0 +1,36 @@
+.messageBox{
+    position: fixed;
+    z-index: 1000;
+    width: 300px;
+    height: 100px;
+    background: rgba(255, 4, 4, 0.836);
+    bottom: 10px;
+    right: 10px;
+    padding: 10px;
+    border-radius: 15px;
+    animation: bottomToTop 3s ease-in-out infinite;
+}
+
+.closeBtn{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+    border-radius: 50%;
+    text-align: center;
+    background: rgb(255, 255, 255);
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+@keyframes bottomToTop{
+    0%{
+        transform: translateY(100%);
+    }
+    100%{
+        transform: translateY(0%);
+    }
+}

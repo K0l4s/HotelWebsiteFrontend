@@ -1,0 +1,134 @@
+.slideShow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slideShow img{
+    height: 500px;
+    border-radius: 10px;
+    margin: 10px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btnGroup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.btnGroup button{
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    background-color: #f1356d;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer; 
+    transform: skewX(-20deg);
+}
+
+.content{
+    
+    background-color: #f1356d;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #f1356d;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    color:#fff;
+}
+
+@media screen and (max-width: 768px){
+    .content{
+        flex-direction: column;
+    }
+    .content .image img{
+        display: none;
+    }
+}
+.content .image{
+    position: relative;
+    margin-left: 30px;
+}
+.content .image img{
+    width: 700px;
+    height: 500px;
+    object-fit: contain;
+    object-fit: cover;
+    border-radius: 15px;
+    margin:10px;
+    transition: all 0.5s ease-in-out;
+}
+
+.content:hover .image img{
+    box-shadow: 0 0 20px rgb(255, 255, 255);
+    filter: blur(5px);
+    
+}
+
+.content .image button{
+    display: none;
+    width: 300px;
+    height: 100px;
+    margin: 10px;
+    border: none;
+    background-color: #fff;
+    color: #f1356d;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer; 
+    position: absolute;
+    bottom: 40%;
+    left: 25%;
+    transition: all 0.5s ease-in-out;
+    z-index: 10;
+    border-radius: 15px;
+}
+
+.content:hover .image button{
+    display: block;
+    animation: fadeIn 1s;
+}
+/* Faded */
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+    
+}
+.content:hover .image button:hover{
+    background-color: #f1356d;
+    box-shadow: 0 0 20px #f1356d;
+    color: #fff;
+}
+
+.hello{
+    font-size: 40px;
+    color: #f1356d;
+    text-align: center;
+    margin-top: 50px;
+    font-weight: bold;
+    animation: blink 2s infinite;
+}
+
+/* Hiệu ứng nhấp nháy */
+@keyframes blink{
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
