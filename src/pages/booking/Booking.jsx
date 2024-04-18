@@ -8,6 +8,7 @@ const Booking = () => {
       <h1>Phương thức thanh toán</h1>
       <p>Momo</p>
       <p>Tiền mặt</p>
+      <p>Hello</p>
     </div>
   )
 }
