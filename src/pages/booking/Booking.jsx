@@ -7,7 +7,7 @@ const Booking = () => {
       <h2>Order của bạn</h2>
       <h1>Phương thức thanh toán</h1>
       <p>Momo</p>
-      <p>Tiền mặtk</p>
+      <p>Tiền mặt</p>
     </div>
   )
 }
