@@ -14,7 +14,7 @@
     margin: 10px;
     box-shadow: 0 0 15px rgb(143, 143, 143);
     transition: all 0.3s;
-    cursor: pointer;
+    /*cursor: pointer;*/
     text-align: center;
 }
 
@@ -31,4 +31,30 @@
     object-position: center;
     box-shadow: 0 0 15px rgb(176, 176, 176);
     margin: 10px;
+}
+.about .text{
+    text-align: center;
+    padding:50px;
+    font-weight: bold;
+    color:white;
+}
+
+.about h1{
+    text-align: center;
+}
+
+.linkLogo{
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+}
+.linkLogo img{
+    width: 30px;
+    height: 30px;
+}
+.linkGroup{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }

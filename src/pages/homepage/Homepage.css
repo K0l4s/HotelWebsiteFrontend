@@ -42,6 +42,7 @@
     align-items: center;
     margin-top: 50px;
     color:#fff;
+    transition: all 0.3ms ease-in-out;
 }
 
 @media screen and (max-width: 768px){
@@ -51,6 +52,11 @@
     .content .image img{
         display: none;
     }
+}
+.content:hover{
+    background-color: white;
+    color: black;
+    cursor:none;
 }
 .content .image{
     position: relative;
