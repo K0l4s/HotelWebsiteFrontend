@@ -22,10 +22,14 @@ const Cart = () => {
   return (
     <div>
       <h1>Giỏ hàng của bạn</h1>
+      <button>Đặt phòng ngay</button>
       <div className="cartItems">
         {orders.length !== 0 ? (
           orders.map((order, index) => (
             <div key={index} className="cartItem">
+              
+              <input type="checkbox" id="check"/>
+              <label for='check'>Chọn dịch vụ</label>
               <h2>{order.serviceName}</h2>
               <p>Giá: {order.price}</p>
               <p>Giá khuyến mãi: {order.salePrice}</p>
