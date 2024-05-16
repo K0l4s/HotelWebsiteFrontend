@@ -1,0 +1,57 @@
+.serviceBox{
+    display: flex;
+    align-items: center;
+    width: 97%;
+    height: 150px;
+    background-color: #eeeeee;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 15px auto ;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: rgb(0, 0, 0);
+}
+.serviceBox button{
+    background-color: #f50057;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin:2px;
+}
+.serviceBox:hover{
+    transform: scale(1.025);
+}
+
+.serviceBox .serviceBoxRight{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-right: 20px;
+}
+.serviceBox .ServiceBoxContent{
+    position: relative;
+    margin:auto;
+}
+.serviceBox .serviceBoxRight img{
+    width: 200px;
+    height: 90px;
+    border-radius: 10px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.serviceBox .actionGroup{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin-left: auto;
+}
+
+

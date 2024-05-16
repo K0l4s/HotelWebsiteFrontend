@@ -43,7 +43,7 @@
 .navbar .buttonGroup button {
     width: auto;
     padding: 10px;
-    height: 50px;
+    /* height: 100%; */
     background: rgba(0, 0, 0, 0);
     border: none;
     outline: none;

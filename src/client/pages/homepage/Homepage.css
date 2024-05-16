@@ -16,6 +16,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+   
 }
 
 .btnGroup button{
@@ -30,16 +31,15 @@
 }
 
 .content{
-    
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #f1356d;
     padding: 10px;
     margin: 10px;
     border-radius: 10px;
     box-shadow: 0 0 10px #f1356d;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
     margin-top: 50px;
     color:#fff;
     transition: all 1s ease-in-out;
@@ -57,13 +57,24 @@
     background-color: white;
     color: black;
 }
+.content .text{
+    width: 50%;
+}
+.content .text h1{
+    color: #fff;
+    transition: all 0.5s ease-in-out;
+}
+.content:hover .text h1{
+    color: black;
+}
 .content .image{
+    width: 50%;
     position: relative;
     margin-left: 30px;
 }
 .content .image img{
-    width: 700px;
-    height: 500px;
+    /* width: 700px; */
+    /* height: 500px; */
     object-fit: contain;
     object-fit: cover;
     border-radius: 15px;
@@ -136,4 +147,12 @@
     100%{
         opacity: 0;
     }
+}
+
+.homepage h1{
+    text-align: center;
+    font-size: 50px;
+    color: #f1356d;
+    margin-top: 50px;
+    font-weight: bold;
 }

@@ -13,13 +13,35 @@ import Contact from '../client/pages/contact/Contact';
 import ServiceDetail from '../client/pages/serviceDetail/ServiceDetail';
 import Cart from '../client/pages/cart/Cart';
 import MessageBox from '../client/components/messageBox/MessageBox';
-import './Router.css'
+import './Router.css';
+import Sidebar from '../management/components/sidebar/Sidebar';
+import Branch from '../management/page/branch/Branch';
+import ServiceAdmin from '../management/page/service/Service';
+
 const Router = () => {
   const [navIsOpen,setNavIsOpen] = useState(true);
   const navigate = useNavigate();
   const handleOpenNav = () => {
     setNavIsOpen(!navIsOpen);
   }
+  if(window.location.pathname.includes("/admin"))
+    return(
+  <div className="">
+      <Sidebar />
+      <div className="main">
+      <Routes>
+          <Route path="/admin" element={<p>Hello</p>} />
+          <Route path="/admin/branch" element={<Branch/>} />
+          <Route path="/admin/dashboard" element={null} />
+          <Route path="/admin/service" element={<ServiceAdmin/>} />
+          <Route path="/admin/booking" element={null}/>
+      </Routes>
+      <div onClick={()=>window.scrollTo(0,0)} className="returnToTop">
+      </div>
+      </div>
+      </div>
+      )
+
   return (
     <div  className="router_main">
       
