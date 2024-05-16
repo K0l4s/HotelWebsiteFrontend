@@ -31,6 +31,7 @@ const Router = () => {
         <MessageBox/>
         <Routes>
             <Route path="/" element={<Homepage/>} />
+            <Route path="/home" element={<Homepage/>} />
             <Route path="/booking" element={<Booking/>} />
             <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Register/>} />
@@ -39,11 +40,11 @@ const Router = () => {
             <Route path="/order" element={<h1>Order của bạn</h1>} />
             <Route path="/about" element={<AboutUs/>} />
             <Route path="/contact" element={<Contact/>} />
-            <Route path="/confirmAccount/:username" element={<ConfirmAccount/>} />
+            <Route path="/confirm-register/:email" element={<ConfirmAccount/>} />
             <Route path="/cart" element={<Cart/>} />
             <Route path="/*" element={<><h1>404 not found</h1> <p>Tính năng đang được bảo trì hoặc phát triển!</p></>} />
         </Routes>
-        <div className="cart" onClick={()=>navigate("cart")}>
+        <div className="cart" onClick={()=>navigate("HotelWebsiteFrontend/cart")}>
           <img src="https://pngimg.com/uploads/shopping_cart/shopping_cart_PNG10.png" alt="" />
         </div>
         <div className="returnToTop" onClick={()=>window.scrollTo(0,0)}>
