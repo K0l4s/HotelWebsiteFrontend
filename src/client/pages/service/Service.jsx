@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Service.css';
 import ServiceTag from '../../components/serviceTag/ServiceTag';
-import APIPath from '../../api/APIPath';
+import APIPath from '../../../api/APIPath';
 
 const Service = () => {
     const [service, setService] = useState([]);

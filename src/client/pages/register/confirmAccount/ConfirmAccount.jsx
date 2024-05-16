@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './ConfirmAccount.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import { HStack, PinInput, PinInputField, useToast } from "@chakra-ui/react"
-import apiService from '../../../api/apiService';
+import apiService from '../../../../api/apiService';
 const ConfirmAccount = () => {
   const toast = useToast();
   const navigate = useNavigate();

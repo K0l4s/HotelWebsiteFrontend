@@ -1,6 +1,6 @@
 import React from 'react'
 import './Contact.css'
-import APIPath from '../../api/APIPath'
+import APIPath from '../../../api/APIPath'
 const Contact = () => {
   const handleSubmit = () => {
     const contact = {

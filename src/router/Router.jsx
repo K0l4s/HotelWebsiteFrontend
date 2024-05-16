@@ -1,21 +1,19 @@
 import React, { useState } from 'react'
+import { RiMenuFill, RiMenuUnfoldLine } from 'react-icons/ri';
 import { Route, Routes, useNavigate } from 'react-router-dom'
-import Navbar from '../components/navbar/Navbar'
-import Homepage from '../pages/homepage/Homepage'
+import Navbar from '../client/components/navbar/Navbar';
+import Login from '../client/pages/login/Login';
+import Register from '../client/pages/register/Register';
+import Service from '../client/pages/service/Service';
+import AboutUs from '../client/pages/aboutUs/AboutUs';
+import ConfirmAccount from '../client/pages/register/confirmAccount/ConfirmAccount';
+import Homepage from '../client/pages/homepage/Homepage';
+import Booking from '../client/pages/booking/Booking';
+import Contact from '../client/pages/contact/Contact';
+import ServiceDetail from '../client/pages/serviceDetail/ServiceDetail';
+import Cart from '../client/pages/cart/Cart';
+import MessageBox from '../client/components/messageBox/MessageBox';
 import './Router.css'
-import Booking from '../pages/booking/Booking'
-import Login from '../pages/login/Login'
-import Register from '../pages/register/Register'
-import { RiMenuUnfoldLine } from "react-icons/ri";
-import { RiMenuFill } from "react-icons/ri";
-import Service from '../pages/service/Service'
-import Contact from '../pages/contact/Contact'
-import ServiceDetail from '../pages/serviceDetail/ServiceDetail'
-import MessageBox from '../components/messageBox/MessageBox'
-import ConfirmAccount from '../pages/register/confirmAccount/ConfirmAccount'
-import Cart from '../pages/cart/Cart'
-import AboutUs from '../pages/aboutUs/AboutUs'
-
 const Router = () => {
   const [navIsOpen,setNavIsOpen] = useState(true);
   const navigate = useNavigate();

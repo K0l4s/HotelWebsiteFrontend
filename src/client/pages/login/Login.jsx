@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import './Login.css'
 import { useNavigate } from 'react-router-dom'
-import APIPath from '../../api/APIPath'
-import apiService from '../../api/apiService'
+import APIPath from '../../../api/APIPath'
+import apiService from '../../../api/apiService'
 const Login = () => {
   const navigate = useNavigate();
   const logIn = () =>{

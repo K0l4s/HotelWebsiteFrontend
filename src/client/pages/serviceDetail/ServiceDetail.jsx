@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './ServiceDetail.css'
 import { useParams } from 'react-router-dom';
-import APIPath from '../../api/APIPath'
+import APIPath from '../../../api/APIPath'
 const ServiceDetail = () => {
     // Lấy id từ url
     const {serviceId} = useParams();

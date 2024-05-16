@@ -1,7 +1,7 @@
 import React from 'react'
 import './Register.css'
 import { useNavigate } from 'react-router-dom'
-import apiService from '../../api/apiService';
+import apiService from '../../../api/apiService';
 const Register = () => {
   const navigate = useNavigate();
   const sendRegister = async () => {
