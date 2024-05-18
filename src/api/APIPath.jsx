@@ -1,4 +1,4 @@
 
-const APIPath = 'http://localhost:9090/api'
+const server = 'http://localhost:9090'
 
-export default APIPath;
+export default server;

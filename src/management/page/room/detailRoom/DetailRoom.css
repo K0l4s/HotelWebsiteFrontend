@@ -1,0 +1,115 @@
+.roomType .header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+.roomType .header button{
+    margin-right: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    background: #f39898;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.roomType .header button:hover{
+    background: #747474;
+}
+
+.roomTypeInformation{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    background: #f2f2f2;
+    margin:10px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 0 rgb(125, 125, 125);
+    color:black;
+}
+h1{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px;
+}
+.roomTypeInformation p{
+    font-size: 15px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.tableContent{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+.tableContent .branch{
+    width: 40%;
+}
+
+.tableContent .roomByBranch{
+    width: 60%;
+}
+.tableContent .branch,
+.tableContent .roomByBranch{
+    margin: 10px;
+    overflow-x: auto;
+    overflow-y: auto;
+    height: 100vh;
+    background: #fff8f8;
+    color:black;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 5px 5px 0 rgb(125, 125, 125);
+}
+
+
+.tableContent table{
+    width: 100%;
+    border-collapse: collapse;
+}
+.tableContent table th{
+    background: #f2f2f2;
+    color: black;
+    font-weight: bold;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #000000;
+}
+
+.tableContent table td{
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #000000;
+}
+.tableContent table tr{
+    transition: all 0.3s ease-in-out;
+}
+.tableContent table tr:nth-child(odd){
+    background: #f2f2f2;
+}
+
+.tableContent table tr:nth-child(even){
+    background: #f39898;
+}
+
+/* Hiệu ứng hover cho trường được chọn */
+.tableContent table tr:hover{
+    background: #747474;
+    color: white;
+}
+
+.tableContent table .active{
+    font-weight: bold;
+}
+.tableContent table .active::after
+{
+    content: '✓';
+    color: green;
+    font-size: 20px;
+    font-weight: bold;
+}

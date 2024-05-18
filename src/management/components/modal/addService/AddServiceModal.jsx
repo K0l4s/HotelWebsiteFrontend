@@ -1,47 +1,57 @@
 import React, { useState } from 'react';
-import './AddService.css';
-import { Modal, ModalContent, ModalOverlay, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button } from '@chakra-ui/react';
-import server from '../../../config/APIPath';
-import APIInformation from '../../../config/APIInformation';
+import './AddServiceModal.css';
+import { Modal, ModalContent, ModalOverlay, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button, useToast } from '@chakra-ui/react';
+import axios from 'axios';
 
 const AddServiceModal = ({ isOpen, onClose }) => {
-  const [image, setImage] = useState(null);
-
-  const handleImageChange = (e) => {
-    const files = Array.from(e.target.files); // Chuyển NodeList thành mảng
-    setImage(files[0]); // Lưu chỉ 1 tệp hình ảnh, hoặc thay đổi tùy vào yêu cầu
-  };
-
+  const toast = useToast();
   const saveService = () => {
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+      console.error('No token found');
+      return;
+    }
+   
     const formData = new FormData();
     formData.append('name', document.getElementById('name').value);
     formData.append('price', document.getElementById('price').value);
-    //formData.append('salePercent', document.getElementById('salePercent').value);
     formData.append('description', document.getElementById('description').value);
-    formData.append('deleted', false);
-    //formData.append('image', image);
+    formData.append('isDeleted', false);
+    formData.append('image', document.getElementById('image').files);
+    console.log(formData.get('name'));
 
     if (formData.get('name') === '' || formData.get('price') === '' || formData.get('salePercent') === '' || formData.get('description') === '') {
       alert('Vui lòng nhập đầy đủ thông tin');
       return;
     }
-
-    fetch(server + '/admin/service/create', {
-      method: 'POST',
+    axios.post('http://localhost:9090/api/v1/management/service/create', formData, {
       headers: {
-        'Content-Type': 'multipart/form-data' + image,
-        'Authorization': 'Basic ' + btoa(APIInformation.username + ":" + APIInformation.password)
-      },
-      body: formData
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        onClose();
-      })
-      .catch(error => console.error('Error:', error));
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${token}`
+      }
+    }).then(res => {
+      console.log(res);
+      // alert('Thêm dịch vụ thành công');
+      toast({
+        title: "Thêm dịch vụ thành công",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom-right"
+      });
+      onClose();
+    }).catch(err => {
+      console.error(err);
+      // alert('Thêm dịch vụ thất bại');
+      toast({
+        title: "Thêm dịch vụ thất bại",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom-right"
+      });
+    });
   };
-
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose} size='full'>
@@ -53,23 +63,25 @@ const AddServiceModal = ({ isOpen, onClose }) => {
             <div className="">
               <div className="form-group">
                 <label htmlFor="name">Tên dịch vụ</label>
-                <input type="text" className="form-control" id="name" />
+                <input required type="text" className="form-control" id="name" />
               </div>
               <div className="form-group">
                 <label htmlFor="price">Giá</label>
-                <input type="number" className="form-control" id="price" />
+                <input required type="number" className="form-control" id="price" />
               </div>
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label htmlFor="salePercent">Phần trăm giảm giá (vd: 10%)</label>
                 <input type="number" className="form-control" id="salePercent" />
-              </div>
+              </div> */}
               <div className="form-group">
                 <label htmlFor="description">Mô tả dịch vụ</label>
-                <input type='text' className="form-control" id="description" />
+                <input required type='text' className="form-control" id="description" />
               </div>
               <div className="form-group">
                 <label htmlFor="image">Upload hình ảnh</label>
-                <input type='file' onChange={handleImageChange} className="form-control" id="image" />
+                {/* <input required type='file' className="form-control" id="image" /> */}
+                {/* Upload multiple image */}
+                <input required type='file' className="form-control" id="image" multiple />
               </div>
             </div>
           </ModalBody>

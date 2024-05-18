@@ -2,7 +2,13 @@
     display: flex;
     flex-direction: column;
 }
-
+.admin_router{
+    display: flex;
+    flex-direction: row;
+}
+.admin{
+    width: 100%;
+}
 .router_main .btnMenu{
     position:fixed;
     top: 10px;
@@ -42,4 +48,15 @@
     border-radius: 50%;
     background: saddlebrown;
 }
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(42, 106, 165);
+    border-radius: 10px;
+}
+
 

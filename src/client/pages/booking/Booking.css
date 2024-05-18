@@ -1,0 +1,12 @@
+.roomList{
+    background: #a0a0a0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+    width: 50%;
+    margin-left: 10px;
+    border-radius: 15px;
+    padding: 20px;
+    min-width: 400px;
+}

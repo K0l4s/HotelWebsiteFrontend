@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
 import './Login.css'
 import { useNavigate } from 'react-router-dom'
-import APIPath from '../../../api/APIPath'
-import apiService from '../../../api/apiService'
+import { useToast } from '@chakra-ui/react'
+import axios from 'axios'
+import server from '../../../api/APIPath'
 const Login = () => {
+  const toast = useToast();
   const navigate = useNavigate();
   const logIn = () =>{
     const email = document.getElementById('email').value;
@@ -12,17 +14,34 @@ const Login = () => {
       "email": email,
       "password": password
     }
-    apiService.post("/api/v1/auth/authenticate", data)
+    // apiService.post("/api/v1/auth/authenticate", data)
       // .then(res => res.json())
+      axios.post(server + "/api/v1/auth/authenticate", data)
       .then(res => {
         console.log(res);
-        if (res.access_token) {
-          localStorage.setItem('access_token', res.access_token);
-          localStorage.setItem('refresh_token', res.refresh_token);
+        if (res.data.access_token) {
+          localStorage.setItem('access_token', res.data.access_token);
+          localStorage.setItem('refresh_token', res.data.refresh_token);
           navigate('/home');
+          toast({
+          title: "Đăng nhập thành công",
+          description: "Chúc bạn có trải nghiệm tuyệt vời",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+          position: "bottom-right"
+        });
         }
       })
       .catch(err => {
+        toast({
+          title: "Đăng nhập thất bại",
+          description: "Vui lòng kiểm tra lại thông tin đăng nhập",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "bottom-right"
+        });
         console.log(err);
       });
   }

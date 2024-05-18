@@ -1,4 +1,5 @@
 import axios from 'axios';
+import server from './APIPath';
 
 class ApiService {
   constructor(baseURL) {
@@ -24,10 +25,18 @@ class ApiService {
       this.handleError(error);
     }
   }
-
+  async getNoBackend(url, headers = {}) {
+    try {
+      const response = await this.api.get(url, { headers : headers });
+      return response.data;
+    } catch (error) {
+      this.handleError(error);
+    }
+  }
   // Method to perform POST request
   async post(url, data, headers = {}) {
     console.log(url);
+    console.log("Check from apiService: "+data.get('name'))
     try {
       const response = await this.api.post(backendApi+url, data, { headers });
       return response.data;
@@ -35,7 +44,7 @@ class ApiService {
       this.handleError(error);
     }
   }
-
+  
   // Method to perform PUT request
   async put(url, data, headers = {}) {
     try {
@@ -75,6 +84,6 @@ class ApiService {
 }
 
 // Usage: create an instance of ApiService with your API base URL
-const apiService = new ApiService('http://localhost:9090/');
-const backendApi = 'http://localhost:9090';
+const apiService = new ApiService(server);
+const backendApi = server;
 export default apiService;

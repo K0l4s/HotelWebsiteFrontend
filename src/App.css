@@ -3,11 +3,13 @@
 body {
   transition: background-color 0.5s ease;
   background-color: #000000;
+  /* background-color: gradient(to right, #49C5F6, #FF2EAF); */
   color:#df5555;
 }
 
 .dark-mode {
   background-color: #363636;
+  /* background-color: gradient(to right, #49C5F6, #FF2EAF); */
   color: #fff;
 }
 

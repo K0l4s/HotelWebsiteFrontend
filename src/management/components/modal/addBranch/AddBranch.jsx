@@ -1,23 +1,38 @@
 import React, { useState } from 'react';
 import {Modal,ModalContent, ModalOverlay, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button} from '@chakra-ui/react';
-import server from '../../../config/APIPath';
-import './AddBranch.css'
-import APIInformation from '../../../config/APIInformation';
+
+import './AddBranch.css';
+import axios from 'axios';
+import server from '../../../../api/APIPath';
 const AddBranchModal = ({isOpen, onClose,responseData}) => {
   function saveBranch() {
-    const branch = {
-      location: document.getElementById('location').value,
-      deleted:  document.getElementById('deleted').value === 'Đã ẩn' ? true : false
-    };
-    console.log(branch);
-    fetch(server+'/admin/branch/create', { method: 'POST', headers: { 'Content-Type': 'application/json' 
-    , 'Authorization': 'Basic ' + btoa(APIInformation.username + ":" + APIInformation.password)}, body: JSON.stringify(branch)
-   })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
+    // const branch = {
+    //   location: document.getElementById('location').value
+    // };
+    const formdata = new FormData();
+    formdata.append("location", document.getElementById('location').value);
+
+    axios.post(server + '/api/v1/management/branch/create', formdata, 
+    { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access_token') } }
+    ).then((response) => {
+      console.log(response.data);
       onClose();
-    });}
+    }
+    ).catch((error) => {
+      console.log(error);
+    }
+    );
+
+  //   console.log(branch);
+  //   fetch(server+'/admin/branch/create', { method: 'POST', headers: { 'Content-Type': 'application/json' 
+  //   , 'Authorization': 'Basic ' + btoa(APIInformation.username + ":" + APIInformation.password)}, body: JSON.stringify(branch)
+  //  })
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     console.log(data);
+  //     onClose();
+    // });
+  }
     
   return (
     <>
@@ -31,14 +46,6 @@ const AddBranchModal = ({isOpen, onClose,responseData}) => {
               <div className="form-group">
                 <label htmlFor="location">Địa chỉ</label>
                 <input type="text" className="form-control" id="location" />
-              </div>
-              <div className="form-group">
-                <label htmlFor="deleted">Trạng thái</label>
-                <select className="form-control" id="deleted">
-                <option>Hoạt động</option>
-                  <option>Đã ẩn</option>
-                  
-                </select>
               </div>
             </div>
           </ModalBody>

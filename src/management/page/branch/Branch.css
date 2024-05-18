@@ -8,3 +8,55 @@
     color: rgb(0, 0, 0);
     cursor: pointer;
 }
+
+.table{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 15px;
+}
+.table input{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+}
+.table table{
+    text-align: center;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table table th{
+    padding: 10px;
+    background-color: #129cff;
+    color: white;
+    border: 1px solid #007bff;
+}
+/* td chẵn màu xám, td lẻ màu đen */
+.table table tr:nth-child(even) td{
+    background-color: #82c3fc;
+    border: 1px solid #007bff;
+    color: black;
+}
+
+.table table tr:nth-child(odd) td{
+    background-color: #ffffff;
+    border: 1px solid #007bff;
+    color: black;
+}
+
+.table table button{
+    width: auto;
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+.table table button:nth-child(1){
+    background-color: rgb(255, 64, 64);
+}

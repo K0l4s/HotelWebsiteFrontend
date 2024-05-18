@@ -3,6 +3,8 @@ import './ConfirmAccount.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import { HStack, PinInput, PinInputField, useToast } from "@chakra-ui/react"
 import apiService from '../../../../api/apiService';
+import axios from 'axios';
+import server from '../../../../api/APIPath';
 const ConfirmAccount = () => {
   const toast = useToast();
   const navigate = useNavigate();
@@ -20,11 +22,12 @@ const ConfirmAccount = () => {
       "email":email,
       "code":pin
     }
-    apiService.post("/api/v1/auth/confirm-email", data)
+    // apiService.post("/api/v1/auth/confirm-email", data)
+      axios.post(server+"/api/v1/auth/confirm-email", data)
       .then(res => {
         console.log(res);
-        localStorage.setItem("access_token",res.access_token);
-        localStorage.setItem("refresh_token",res.refresh_token);
+        localStorage.setItem("access_token",res.data.access_token);
+        localStorage.setItem("refresh_token",res.data.refresh_token);
         navigate("/home")
       })
       .catch(err => {

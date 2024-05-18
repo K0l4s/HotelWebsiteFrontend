@@ -9,7 +9,7 @@ const Sidebar = () => {
                 <button>Dashboard</button>
                 <button>Booking</button>
                 <button>User</button>
-                <button>Room</button>
+                <button onClick={()=>navigate("/admin/room")}>Room</button>
                 <button>Payment</button>
                 <button onClick={()=>navigate("/admin/service")}>Service</button>
                 <button>History</button>

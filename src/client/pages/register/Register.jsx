@@ -2,6 +2,8 @@ import React from 'react'
 import './Register.css'
 import { useNavigate } from 'react-router-dom'
 import apiService from '../../../api/apiService';
+import axios from 'axios';
+import server from '../../../api/APIPath';
 const Register = () => {
   const navigate = useNavigate();
   const sendRegister = async () => {
@@ -14,26 +16,15 @@ const Register = () => {
       birthday: document.getElementById("birthday").value
     }
     // console.log(user);
-    apiService.post("/api/v1/auth/register", user)
+    // apiService.post("/api/v1/auth/register", user)
+    axios.post(server+"/api/v1/auth/register", user)
     .then(res => {
       // console.log(res.data);
-      navigate('/confirm-register/'+res.email);
+      navigate('/confirm-register/'+res.data.email);
     })
     .catch(err => {
       console.log(err.response.data);
     });
-  // You can add further logic here, such as sending the PIN to an API
-    
-    // console.log(sendRequest);
-    // if(sendRequest.email!==undefined){
-    //   alert("Đăng ký thành công!");
-    //   navigate("/confirm-register/"+sendRequest.email);
-    // }
-    // const response = await apiService.post(APIPath.register, user);
-    // if(response.status === 200){
-    //   alert("Đăng ký thành công!");
-    //   navigate("/login");
-    // }
   }
   return (
     <div className="register">

@@ -4,11 +4,6 @@ import { IoMdAddCircleOutline } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
 
 const ServiceTag = (service) => {
-  const salePrice = service.service.price - service.service.price * (service.service.salePercent / 100)
-  var salePriceFormat = 0;
-  if(salePrice % 1 === 0){
-    salePriceFormat = salePrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  }
  
   var price = 0;
   if(service.service.price % 1 === 0){
@@ -21,12 +16,11 @@ const ServiceTag = (service) => {
   }
   // console.log(id);
   const navigate=useNavigate();
-  const addOrderToCookie = () => {
+  const addOrder= () => {
     const order = {
       "serviceId": service.service.id,
       "serviceName": service.service.name,
       "price": service.service.price,
-      "salePrice": salePrice,
       "quantity": 1
     }
     console.log("order", order)
@@ -59,15 +53,11 @@ const ServiceTag = (service) => {
         <p className='sDecripstion'>{service.service.description!=null? service.service.description : '[Không có mô tả]'}</p>
         <div className="sRight">
           <div className="price">Giá: {price}</div>
-          {service.service.salePercent !== 0 ? 
-          (<>
-          <div className='salePercent'>Giảm giá: {service.service.salePercent}%</div> 
-          <div className='salePrice'>Giảm còn: {salePriceFormat}</div></>) : null}
           
         </div>
         </div>
-      <button className='detailBtn' onClick={handleDetail}>Chi tiết dịch vụ</button>
-      <div className="addOrder" onClick={addOrderToCookie}><IoMdAddCircleOutline size={50} color='green'/></div>
+      {/* <button className='detailBtn' onClick={handleDetail}>Chi tiết dịch vụ</button> */}
+      <div className="addOrder" onClick={addOrder}><IoMdAddCircleOutline size={50} color='green'/></div>
       <div className="backGroundImage">
         <img src="https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg" alt="serviceImage" className='sImage' />
       </div>

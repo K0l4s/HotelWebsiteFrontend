@@ -1,52 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Cart.css';
+import axios from 'axios';
+import RoomTag from '../../components/roomTag/RoomTag';
+import server from '../../../api/APIPath';
 
 const Cart = () => {
-  const [orders, setOrders] = useState(() => JSON.parse(localStorage.getItem('orders')) || []);
+  const [cartItems, setCartItems] = useState([]);
 
-  const deleteItem = (serviceId) => () => {
-    const updatedOrders = orders.filter((order) => order.serviceId !== serviceId);
-    setOrders(updatedOrders);
-    localStorage.setItem('orders', JSON.stringify(updatedOrders));
-  };
+  useEffect(() => {
+    fetchCartItems();
+  }, []);
+  const fetchCartItems = async () => {
 
-  const updateQuantity = (serviceId, newQuantity) => () => {
-    if(newQuantity <= 0) return deleteItem(serviceId)();
-    const updatedOrders = orders.map((order) =>
-      order.serviceId === serviceId ? { ...order, quantity: newQuantity } : order
-    );
-    setOrders(updatedOrders);
-    localStorage.setItem('orders', JSON.stringify(updatedOrders));
+
+    axios.get(server + "/api/v1/cart/all",
+      { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access_token') } })
+      .then((response) => {
+        console.log(response.data);
+        setCartItems(response.data);
+      }).catch((error) => {
+        console.log(error);
+      });
   };
+  // const response = await axios.get(server + "/api/v1/cart/all");
+  // console.log(response.data);
+  // setCartItems(response.data);
+
 
   return (
     <div>
       <h1>Giỏ hàng của bạn</h1>
       <button>Đặt phòng ngay</button>
       <div className="cartItems">
-        {orders.length !== 0 ? (
-          orders.map((order, index) => (
-            <div key={index} className="cartItem">
-              
-              <input type="checkbox" id="check"/>
-              <label for='check'>Chọn dịch vụ</label>
-              <h2>{order.serviceName}</h2>
-              <p>Giá: {order.price}</p>
-              <p>Giá khuyến mãi: {order.salePrice}</p>
-              <p>
-                Số lượng:{' '}
-                <button onClick={updateQuantity(order.serviceId, order.quantity - 1)}>-</button>{' '}
-                {order.quantity}
-                <button onClick={updateQuantity(order.serviceId, order.quantity + 1)}>+</button>{' '}
-              </p>
-              <button onClick={deleteItem(order.serviceId)} className="deleteItem">
-                Del
-              </button>
-            </div>
-          ))
-        ) : (
-          <h1>Chưa có sản phẩm nào trong giỏ hàng</h1>
-        )}
+      {cartItems.map((item) => (
+        <div className='items'>
+        <button className='deleteButton'>X</button>
+        <RoomTag room={item} id={item.id} key={item.id} />
+        </div>
+      ))}
       </div>
     </div>
   );
