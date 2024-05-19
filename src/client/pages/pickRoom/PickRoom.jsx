@@ -70,7 +70,7 @@ const PickRoom = () => {
             console.log(error);
         }
     }
-    const addServiceToChoose = (service) => {s
+    const addServiceToChoose = (service) => {
         setChoosenService([...choosenService, service]);
     }
     return (
