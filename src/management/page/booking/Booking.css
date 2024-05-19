@@ -1,0 +1,163 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.booking-container {
+  position: relative;
+  height: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.booking-content {
+  position: relative;
+  z-index: 2;
+  padding: 1%;
+  text-align: center;
+  background: rgba(250, 250, 250, 0.7);
+  border-radius: 10px;
+  width: 90%;
+  height: 750px; /* Adjust the height as needed */
+  margin: 0 auto; /* Center the content horizontally */
+}
+
+.room-table {
+  margin: 20px auto;
+  width: 100%;
+  max-height: 500px; /* Set the maximum height for scrolling */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.room-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: black;
+}
+
+.room-table th {
+  background-color: #f6f6f6;
+  color: rgb(18, 1, 1);
+}
+
+.room-table th,
+.room-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.room-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.room-table thead tr,
+.room-table tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.room-table thead {
+  width: calc(100% - 17px); /* Adjust for scrollbar width */
+}
+
+.details-button {
+  padding: 10px 20px;
+  background-color: #007bff; /* Button color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.details-button:hover {
+  background-color: #0056b3; /* Darker shade when hovered */
+}
+
+.room-details-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.room-details {
+  width: 500px;
+  padding: 5px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0);
+  text-align: center;
+  color: #33333300; /* Default text color */
+}
+
+.room-details .image-container {
+  margin-bottom: 20px;
+  height: 200px; /* Fixed height for the image container */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.room-details .room-image-details {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ensures the entire image fits within the container */
+  border-radius: 10px;
+}
+
+.room-details .room-info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.room-details .room-info-table td {
+  padding: 10px;
+  border:0px solid #ddd;
+  text-align: right;
+  color: #55555500; /* Text color for table cells */
+}
+
+.room-details .room-info-table td:first-child {
+  font-weight: bold;
+  color: #000000; /* Text color for the first column (labels) */
+  width: 20%; /* Set width for the first column */
+  font-size: 12px; /* Set font size for the first column */
+}
+
+.room-details .room-info-table td:last-child {
+  width: 80%; /* Set width for the second column */
+  font-size: 14px; /* You can set a different font size for the second column if needed */
+}
+
+.room-details button {
+  padding: 10px 20px;
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.room-details button:hover {
+  background-color: #cc0000;
+}
