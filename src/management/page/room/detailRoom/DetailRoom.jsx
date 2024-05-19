@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import server from '../../../../api/APIPath';
 import axios from 'axios';
 import './DetailRoom.css'
+import { MdDeleteForever, MdEdit } from 'react-icons/md';
+import { FaEdit } from 'react-icons/fa';
 const DetailRoom = () => {
+    const navigate = useNavigate();
     const id = useParams().id;
+    const [currentLocation, setCurrentLocation] = useState('Chưa chọn chi nhánh');
 
     const [roomTypeInfo, setRoomTypeInfo] = useState([]);
     const [branchList, setBranchList] = useState([]);
@@ -56,8 +60,10 @@ const DetailRoom = () => {
             <div className="header">
                 <h1>Chi tiết loại phòng</h1>
                 <div className="buttonGroup">
+                <button>Đăng ký loại phòng cho chi nhánh</button>
                     <button>Sửa</button>
                     <button>Xóa</button>
+                    <button onClick={()=>navigate("/admin/room")}>Quay lại</button>
                 </div>
             </div>
             <div className="roomTypeInformation">
@@ -77,6 +83,11 @@ const DetailRoom = () => {
                             <th>Địa chỉ</th>
                             <th>Quản lý</th>
                         </tr>
+                        {branchList.length === 0 ? (
+                            <tr>
+                                <td colSpan="3">Không có dữ liệu</td>
+                            </tr>
+                        ) : null}
                         {branchList.map((branch, index) => (
                             <tr className='branchItems' id={"branch" + branch.id} key={index} onClick={() => {
                                 fetchRooms(branch.id);
@@ -91,15 +102,15 @@ const DetailRoom = () => {
                                 
 
                                     document.getElementById("branch" + branch.id).classList.add("active");
-
+                                setCurrentLocation(branch.location);
                                 // document.getElementById("branch"+branch.id)
                             }
                             }>
                                 <td>{branch.id}</td>
                                 <td>{branch.location}</td>
                                 <td>
-                                    <button>Xóa</button>
-                                    <button>Chỉnh sửa</button>
+                                    <button><MdDeleteForever/></button>
+                                    <button><FaEdit/></button>
                                 </td>
                             </tr>
                         ))}
@@ -107,7 +118,7 @@ const DetailRoom = () => {
                     </table>
                 </div>
                 <div className='roomByBranch'>
-                    <h1>Các phòng có trong chi nhánh</h1>
+                    <h1>Các phòng có trong chi nhánh {currentLocation}</h1>
                     <table>
                         <tr>
                             <th>ID</th>
@@ -121,8 +132,8 @@ const DetailRoom = () => {
                                 <td>{room.number}</td>
                                 <td>{room.status}</td>
                                 <td>
-                                    <button>Xóa</button>
-                                    <button>Chỉnh sửa</button>
+                                    <button><MdEdit/></button>
+                                    <button><FaEdit/></button>
                                 </td>
                             </tr>
                         ))}

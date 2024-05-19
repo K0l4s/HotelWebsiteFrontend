@@ -3,6 +3,9 @@ import './Room.css'
 import axios from 'axios';
 import server from '../../../api/APIPath';
 import { useNavigate } from 'react-router-dom';
+import { MdDeleteForever } from 'react-icons/md';
+import { FaEdit } from 'react-icons/fa';
+import { TbListDetails } from 'react-icons/tb';
 const Room = () => {
     const [roomTypes, setRoomTypes] = useState([]);
     const navigate = useNavigate();
@@ -20,7 +23,7 @@ const Room = () => {
             });
     }
   return (
-    <div classNam='roomPage'>
+    <div className='roomPage'>
         <h1>Loại phòng hiện có</h1>
         <button>Thêm loại phòng mới</button>
         <table>
@@ -40,13 +43,17 @@ const Room = () => {
                     <td>{roomType.acreage}</td>
                     <td>{roomType.description}</td>
                     <td>
-                        <button>Sửa</button>
-                        <button>Xóa</button>
-                        <button onClick={()=>navigate(`/admin/room/${roomType.id}`)}>Quản lý chi tiết</button>
+                        <button><FaEdit color='yellow'/></button>
+                        <button><MdDeleteForever color='pink'/></button>
+                        <button onClick={()=>navigate(`/admin/room/${roomType.id}`)}><TbListDetails/></button>
                     </td>
                 </tr>
             ))}
-            
+            {roomTypes.length<1 && (<tr>
+                    <td colSpan="6">No data</td>
+                </tr>
+                )
+                }
         </table>
     </div>
   )

@@ -1,6 +1,8 @@
 import React from 'react'
 import './RoomTag.css'
+import { useNavigate } from 'react-router-dom';
 const RoomTag = (room) => {
+    const navigate = useNavigate();
     const formatPrice = room.room.priceEachRoom.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return (
         <div>
@@ -9,7 +11,7 @@ const RoomTag = (room) => {
                 <p>{room.room.name}</p>
                 <p>Giá: {formatPrice} / giờ</p>
                 <div className="actionGroup">
-                    <button>Chi tiết</button>
+                    <button onClick={()=>navigate(`/room/${room.id}`)}>Chi tiết</button>
                     <button>Chọn phòng</button>
                 </div>
             </div>

@@ -3,8 +3,10 @@ import './Booking.css'
 import axios from 'axios'
 import server from '../../../api/APIPath';
 import RoomTag from '../../components/roomTag/RoomTag';
+import { useNavigate } from 'react-router-dom';
 
 const Booking = () => {
+  const navigate = useNavigate();
   const [rooms, getRooms] = useState([])
   useEffect(() => {
     fetchRooms();
@@ -21,7 +23,6 @@ const Booking = () => {
   return (
     <div className='booking'>
       <h1>Đặt phòng</h1>
-      <p>Phòng bạn đã chọn</p>
       <p>Danh sách phòng hiện có</p>
       <div className="roomList">
         {rooms.map((room) => (
