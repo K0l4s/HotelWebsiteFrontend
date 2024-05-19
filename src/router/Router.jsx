@@ -20,6 +20,7 @@ import ServiceAdmin from '../management/page/service/Service';
 import Room from '../management/page/room/Room';
 import RoomDetail from '../management/page/room/detailRoom/DetailRoom';
 import RoomDetailClient from '../client/pages/RoomDetailClient/RoomDetailClient';
+import PickRoom from '../client/pages/pickRoom/PickRoom';
 const Router = () => {
   const [navIsOpen, setNavIsOpen] = useState(true);
   const navigate = useNavigate();
@@ -57,6 +58,7 @@ const Router = () => {
           <Route path="/" element={<Homepage />} />
           <Route path="/home" element={<Homepage />} />
           <Route path="/booking" element={<Booking />} />
+          <Route path="/picking/:roomid" element={<PickRoom />} />
           <Route path='/room/:id' element={<RoomDetailClient />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

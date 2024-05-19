@@ -94,7 +94,7 @@ h1{
 }
 
 .tableContent table tr:nth-child(even){
-    background: #f39898;
+    background: lightgray;
 }
 
 /* Hiệu ứng hover cho trường được chọn */

@@ -127,15 +127,27 @@ const DetailRoom = () => {
                             <th>Quản lý</th>
                         </tr>
                         {roomList.map((room, index) => (
-                            <tr key={index}>
+                            // Nếu room.status là đang isBooking thì background color màu xanh lá
+                            room.status === "isBooking"? 
+                                (<tr key={index} style={{backgroundColor: "red",fontWeight:"bold"}}>
                                 <td>{room.id}</td>
                                 <td>{room.number}</td>
-                                <td>{room.status}</td>
+                                <td>Đang có khách đặt</td>
                                 <td>
                                     <button><MdEdit/></button>
                                     <button><FaEdit/></button>
                                 </td>
-                            </tr>
+                            </tr>)
+                            :
+                            (<tr key={index}>
+                                <td>{room.id}</td>
+                                <td>{room.number}</td>
+                                <td>Phòng hiện đang trống</td>
+                                <td>
+                                    <button><MdEdit/></button>
+                                    <button><FaEdit/></button>
+                                </td>
+                            </tr>)
                         ))}
                         {/* Nếu không có roomList thì thông báo rỗng */}
                         {roomList.length === 0 ? (
