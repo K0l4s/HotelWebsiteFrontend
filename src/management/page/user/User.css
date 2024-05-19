@@ -1,0 +1,157 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .user-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    overflow: auto;
+    height: 100vh;
+  }
+  
+  
+  h1 {
+    margin-bottom: 20px;
+    color: #050005;
+    font-size: 50px; /* Kích thước font */
+    font-weight: bold; /* Độ đậm của font */
+    text-transform: uppercase; /* Chuyển đổi thành chữ in hoa */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+    transition: text-shadow 0.3s ease-in-out; /* Hiệu ứng transition */
+  }
+  
+  h1:hover {
+    text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng khi hover */
+  }  
+  
+  .user-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .user-card {
+    display: flex; /* Sử dụng flexbox để căn chỉnh nội dung */
+    flex-direction: column; /* Sắp xếp các phần tử theo chiều dọc */
+    justify-content: center; /* Canh chỉnh nội dung theo chiều dọc vào giữa */
+    align-items: center; /* Canh chỉnh nội dung theo chiều ngang vào giữa */
+    width: calc(25% - 40px); /* 25% để có 4 ô trên một hàng và trừ đi 40px để tính toán khoảng cách giữa các ô */
+    margin: 50px; /* Khoảng cách giữa các ô */
+    border: 5px solid #351296; /* Tạo viền cho ô */
+    border-radius: 10px; /* Làm mềm góc của ô */
+    overflow: hidden;
+    padding: 10px; /* Tạo hình vuông cho viền bằng cách thiết lập padding */
+    background-color: #fff; /* Màu nền cho ô */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Thêm shadow cho ô */
+    transition: transform 0.3s ease-in-out;
+    text-align: left;
+  }
+  
+  
+  @media screen and (max-width: 768px) {
+    .user-card {
+      width: calc(100% - 40px); 
+    }
+  }
+  
+
+  .image-container {
+    width: 100%;
+    height: 250px; /* Điều chỉnh chiều cao tùy ý */
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  
+  .user-image {
+    width: 100%; /* Sử dụng 100% để hình ảnh đầy đủ chiếm width của .image-container */
+    height: 100%; /* Sử dụng 100% để hình ảnh đầy đủ chiếm height của .image-container */
+    object-fit: cover;
+  }
+  
+ 
+  .user-card:hover {
+    transform: translateY(-30px);
+  }
+  
+  .user-card h2 {
+    margin: 10px 0; /* Giảm khoảng cách giữa tiêu đề và các thông tin */
+    color: #333; /* Màu chữ */
+  }
+  
+  .user-card p {
+    margin: 5px 0; /* Giảm khoảng cách giữa các dòng thông tin */
+    color: #666; /* Màu chữ */
+  }
+  
+  .user-card button {
+    padding: 8px 16px; /* Kích thước nút */
+    background-color: #007bff; /* Màu nút */
+    color: #fff; /* Màu chữ nút */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out; /* Hiệu ứng khi hover */
+  }
+  
+  
+  .user-card button:hover {
+    background-color: #0056b3; /* Màu nền khi hover */
+  }
+  
+  .user-details-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .user-details {
+    width: 400px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .user-details p {
+    margin: 10px 0;
+    color: #555;
+    text-align: left;
+  }
+  
+  .user-details button {
+    padding: 10px 20px;
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .user-details button:hover {
+    background-color: #cc0000;
+  }
+    
+  .hotel-image {
+    width: 100%;
+    height: 300px; 
+  }
+  
