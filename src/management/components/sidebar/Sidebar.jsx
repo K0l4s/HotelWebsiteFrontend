@@ -10,7 +10,7 @@ const Sidebar = () => {
                 <button>Booking</button>
                 <button>User</button>
                 <button onClick={()=>navigate("/admin/room")}>Room</button>
-                <button>Payment</button>
+                <button onClick={()=>navigate("/admin/payment")}>Payment</button>
                 <button onClick={()=>navigate("/admin/service")}>Service</button>
                 <button>History</button>
                 <button onClick={()=>navigate("/admin/branch")}>Branch</button>

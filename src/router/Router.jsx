@@ -20,6 +20,8 @@ import ServiceAdmin from '../management/page/service/Service';
 import Room from '../management/page/room/Room';
 import RoomDetail from '../management/page/room/detailRoom/DetailRoom';
 import RoomDetailClient from '../client/pages/RoomDetailClient/RoomDetailClient';
+import Payment from '../management/page/payment/Payment';
+
 const Router = () => {
   const [navIsOpen, setNavIsOpen] = useState(true);
   const navigate = useNavigate();
@@ -39,6 +41,7 @@ const Router = () => {
             <Route path="/admin/booking" element={null} />
             <Route path="/admin/room" element={<Room/>} />
             <Route path="/admin/room/:id" element={<RoomDetail/>} />
+            <Route path="/admin/payment" element={<Payment/>} />
           </Routes>
           <div onClick={() => window.scrollTo(0, 0)} className="returnToTop">
           </div>
