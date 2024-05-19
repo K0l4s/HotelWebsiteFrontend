@@ -20,6 +20,9 @@ import ServiceAdmin from '../management/page/service/Service';
 import Room from '../management/page/room/Room';
 import RoomDetail from '../management/page/room/detailRoom/DetailRoom';
 import RoomDetailClient from '../client/pages/RoomDetailClient/RoomDetailClient';
+import BookingAdnin from '../management/page/booking/Booking';
+import User from '../management/page/user/User';
+
 const Router = () => {
   const [navIsOpen, setNavIsOpen] = useState(true);
   const navigate = useNavigate();
@@ -36,9 +39,10 @@ const Router = () => {
             <Route path="/admin/branch" element={<Branch />} />
             <Route path="/admin/dashboard" element={null} />
             <Route path="/admin/service" element={<ServiceAdmin />} />
-            <Route path="/admin/booking" element={null} />
+            <Route path="/admin/booking" element={<BookingAdnin />} />
             <Route path="/admin/room" element={<Room/>} />
             <Route path="/admin/room/:id" element={<RoomDetail/>} />
+            <Route path="/admin/user" element={<User />} />
           </Routes>
           <div onClick={() => window.scrollTo(0, 0)} className="returnToTop">
           </div>
