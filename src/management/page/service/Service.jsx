@@ -6,7 +6,7 @@ import { useToast } from '@chakra-ui/react'
 import AddServiceModal from '../../components/modal/addService/AddServiceModal'
 const Service = () => {
     const toast = new useToast();
-    const [serviceList, setServiceList] = useState([])
+    const [serviceList, setServiceList] = useState([]) 
     useEffect(() => {
         getServiceData();
     }, [])
@@ -50,19 +50,18 @@ const Service = () => {
         }
     }
 
-
 const [isOpenAddService, setIsOpenAddService] = useState(false)
 const onCloseAddService = () => {
     setIsOpenAddService(false);
     getServiceData();
 }
 return (
-    <div>
+    <div className='servicePage'>
         <h1>Quản lý dịch vụ</h1>
-        <div className="search">
+        {/* <div className="search">
             <input type="text" placeholder="Tìm kiếm dịch vụ..." />
             <button>Search</button>
-        </div>
+        </div> */}
         <button className="add" onClick={() => setIsOpenAddService(true)}>Thêm dịch vụ mới</button>
         <div className="serviceList">
             {serviceList.length == 0 ? (<h1>Không lấy được dữ liệu, hãy thử tạo một trường dữ liệu mới!</h1>) :

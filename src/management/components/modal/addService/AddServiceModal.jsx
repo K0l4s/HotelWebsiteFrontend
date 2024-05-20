@@ -59,7 +59,7 @@ const AddServiceModal = ({ isOpen, onClose }) => {
   };
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} size='full'>
+      <Modal isOpen={isOpen} onClose={onClose} size='xl'>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Thêm dịch vụ mới</ModalHeader>

@@ -10,3 +10,18 @@
     padding: 20px;
     min-width: 400px;
 }
+
+.roomItems{
+    position: relative;
+}
+.roomItems .addToCart{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #0084ff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}

@@ -37,7 +37,7 @@ const Service = () => {
                     title: "Lỗi khi lấy dữ liệu service",
                     description: "Vui lòng thử lại sau",
                     status: "error",
-                    duration: 5000,
+                    duration: 5000, 
                     isClosable: true,
                     position: "bottom-right"
                 });

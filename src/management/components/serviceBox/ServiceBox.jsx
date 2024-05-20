@@ -37,7 +37,7 @@ const ServiceBox = (service) => {
             <p>Giá: {price} vnđ</p>
         </div>
         <div className="actionGroup">
-            <button className='action'>Edit</button>
+            {/* <button className='action'>Edit</button> */}
             <button className='action' onClick={deleteService}>Delete</button>
         </div>
     </div>

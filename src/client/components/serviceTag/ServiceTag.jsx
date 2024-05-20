@@ -30,7 +30,7 @@ const ServiceTag = (service) => {
           
         </div>
         </div>
-      {/* <button className='detailBtn' onClick={handleDetail}>Chi tiết dịch vụ</button> */}
+       <button className='detailBtn' onClick={handleDetail}>Chi tiết dịch vụ</button> 
       {/* <div className="addOrder" onClick={addOrder}><IoMdAddCircleOutline size={50} color='green'/></div> */}
       <div className="backGroundImage">
         <img src="https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg" alt="serviceImage" className='sImage' />

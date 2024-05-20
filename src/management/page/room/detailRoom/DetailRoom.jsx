@@ -72,8 +72,8 @@ const DetailRoom = () => {
                 <h2>Chi tiết loại phòng</h2>
                 <div className="buttonGroup">
                 <button onClick={()=>setIsOpened(true)}>Đăng ký loại phòng cho chi nhánh</button>
-                    <button>Sửa</button>
-                    <button>Xóa</button>
+                    {/* <button>Sửa</button>
+                    <button>Xóa</button> */}
                     <button onClick={()=>navigate("/admin/room")}>Quay lại</button>
                 </div>
             </div>
@@ -92,7 +92,7 @@ const DetailRoom = () => {
                         <tr>
                             <th>ID</th>
                             <th>Địa chỉ</th>
-                            <th>Quản lý</th>
+                            {/* <th>Quản lý</th> */}
                         </tr>
                         {branchList.length === 0 ? (
                             <tr>
@@ -119,10 +119,10 @@ const DetailRoom = () => {
                             }>
                                 <td>{branch.id}</td>
                                 <td>{branch.location}</td>
-                                <td>
+                                {/* <td>
                                     <button><MdDeleteForever/></button>
                                     <button><FaEdit/></button>
-                                </td>
+                                </td> */}
                             </tr>
                         ))}
                         {/* Nếu không có branchList thì thông báo rỗng */}
@@ -135,7 +135,7 @@ const DetailRoom = () => {
                             <th>ID</th>
                             <th>Số phòng</th>
                             <th>Trạng thái</th>
-                            <th>Quản lý</th>
+                            {/* <th>Quản lý</th> */}
                         </tr>
                         {roomList.map((room, index) => (
                             // Nếu room.status là đang isBooking thì background color màu xanh lá
@@ -144,20 +144,20 @@ const DetailRoom = () => {
                                 <td>{room.id}</td>
                                 <td>{room.number}</td>
                                 <td>Đang có khách đặt</td>
-                                <td>
+                                {/* <td>
                                     <button><MdEdit/></button>
                                     <button><FaEdit/></button>
-                                </td>
+                                </td> */}
                             </tr>)
                             :
                             (<tr key={index}>
                                 <td>{room.id}</td>
                                 <td>{room.number}</td>
                                 <td>Phòng hiện đang trống</td>
-                                <td>
+                                {/* <td>
                                     <button><MdEdit/></button>
                                     <button><FaEdit/></button>
-                                </td>
+                                </td> */}
                             </tr>)
                         ))}
                         {/* Nếu không có roomList thì thông báo rỗng */}
