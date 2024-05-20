@@ -40,7 +40,6 @@ const Booking = () => {
           <table>
             <thead>
               <tr>
-                
                 <th>Room Name</th>
                 <th>Type</th>
                 <th>Price</th>
@@ -50,7 +49,6 @@ const Booking = () => {
             <tbody>
               {rooms.map((room) => (
                 <tr key={room.id}>
-                  
                   <td>{room.name}</td>
                   <td>{room.type}</td>
                   <td>${room.price} per night</td>
@@ -68,7 +66,7 @@ const Booking = () => {
             <div className="room-details">
               <div className="image-container">
                 <img
-                  src={require(`C:/ThuongMai/HotelWebsiteFrontend/src/management/page/booking/PHONGVIP1.jpg`)}
+                  src={require(`../booking/PHONGVIP1.jpg`)}
                   alt={selectedRoom.name}
                   className="room-image-details"
                 />

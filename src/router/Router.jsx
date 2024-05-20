@@ -20,9 +20,12 @@ import ServiceAdmin from '../management/page/service/Service';
 import Room from '../management/page/room/Room';
 import RoomDetail from '../management/page/room/detailRoom/DetailRoom';
 import RoomDetailClient from '../client/pages/RoomDetailClient/RoomDetailClient';
+import PickRoom from '../client/pages/pickRoom/PickRoom';
 import Payment from '../management/page/payment/Payment';
 import BookingAdnin from '../management/page/booking/Booking';
 import User from '../management/page/user/User';
+import PaymentClient from '../client/pages/paymentClient/PaymentClient';
+import ContactManagement from '../management/page/contactManagement/ContactManagement';
 
 const Router = () => {
   const [navIsOpen, setNavIsOpen] = useState(true);
@@ -45,6 +48,8 @@ const Router = () => {
             <Route path="/admin/room/:id" element={<RoomDetail/>} />
             <Route path="/admin/payment" element={<Payment/>} />
             <Route path="/admin/user" element={<User />} />
+            <Route path='/admin/contact' element={<ContactManagement/>} />
+            <Route path='/admin/*' element={<h1>404 not found</h1>} />
           </Routes>
           <div onClick={() => window.scrollTo(0, 0)} className="returnToTop">
           </div>
@@ -58,11 +63,12 @@ const Router = () => {
       {navIsOpen ? <Navbar /> : null}
       <button className='btnMenu' onClick={handleOpenNav}>{navIsOpen ? <RiMenuUnfoldLine /> : <RiMenuFill />}</button>
       <div>
-        <MessageBox />
+        {/* <MessageBox /> */}
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/home" element={<Homepage />} />
           <Route path="/booking" element={<Booking />} />
+          <Route path="/picking/:roomid" element={<PickRoom />} />
           <Route path='/room/:id' element={<RoomDetailClient />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -73,6 +79,7 @@ const Router = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/confirm-register/:email" element={<ConfirmAccount />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/payment/:id" element={<PaymentClient />} />
           <Route path="/*" element={<><h1>404 not found</h1> <p>Tính năng đang được bảo trì hoặc phát triển!</p></>} />
         </Routes>
         <div className="cart" onClick={() => navigate("/cart")}>

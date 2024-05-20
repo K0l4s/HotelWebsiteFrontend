@@ -23,6 +23,10 @@
     transform: scale(1.05);
 }
 
+.teamGroup .team p{
+    color:black;
+}
+
 .teamGroup .team .avt{
     width: 150px;
     height: 150px;

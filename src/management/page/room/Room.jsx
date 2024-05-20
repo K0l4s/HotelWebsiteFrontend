@@ -6,7 +6,21 @@ import { useNavigate } from 'react-router-dom';
 import { MdDeleteForever } from 'react-icons/md';
 import { FaEdit } from 'react-icons/fa';
 import { TbListDetails } from 'react-icons/tb';
+import AddRoomTypeModal from '../../components/modal/addRoomType/AddRoomTypeModal';
+import UpdateBranchModal from '../../components/modal/updateBranch/UpdateBranchModal';
+import UpdateRoomTypeModal from '../../components/modal/updateRoo,Type/UpdateRoomTypeModal';
 const Room = () => {
+    const [isOpenRoomTypeModal, setIsOpenRoomTypeModal] = useState(false);
+    const [isOpenUpdateRoomTypeModal, setIsOpenUpdateRoomTypeModal] = useState(false);
+    const [roomTypeid, setRoomTypeId] = useState(0);
+    const onCloseUpdateRoomTypeModal = () => {
+        setIsOpenUpdateRoomTypeModal(false);
+    }
+
+    const onCloseRoomTypeModal = () => {
+        setIsOpenRoomTypeModal(false);
+        window.location.reload();
+    }
     const [roomTypes, setRoomTypes] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
@@ -22,10 +36,14 @@ const Room = () => {
                 console.log(error);
             });
     }
+    const updateRoomType=(id) =>{
+        setRoomTypeId(id);
+        setIsOpenUpdateRoomTypeModal(true);
+    }
   return (
     <div className='roomPage'>
-        <h1>Loại phòng hiện có</h1>
-        <button>Thêm loại phòng mới</button>
+        <h2>Loại phòng hiện có</h2>
+        <button onClick={()=>setIsOpenRoomTypeModal(true)}>Thêm loại phòng mới</button>
         <table>
             <tr>
                 <th>ID</th>
@@ -43,8 +61,8 @@ const Room = () => {
                     <td>{roomType.acreage}</td>
                     <td>{roomType.description}</td>
                     <td>
-                        <button><FaEdit color='yellow'/></button>
-                        <button><MdDeleteForever color='pink'/></button>
+                        <button onClick={()=>updateRoomType(roomType.id)} ><FaEdit color='yellow'/></button>
+                        {/* <button><MdDeleteForever color='pink'/></button> */}
                         <button onClick={()=>navigate(`/admin/room/${roomType.id}`)}><TbListDetails/></button>
                     </td>
                 </tr>
@@ -55,6 +73,8 @@ const Room = () => {
                 )
                 }
         </table>
+        <AddRoomTypeModal isOpen={isOpenRoomTypeModal} onClose={onCloseRoomTypeModal} />
+        <UpdateRoomTypeModal isOpen={isOpenUpdateRoomTypeModal} onClose={onCloseUpdateRoomTypeModal} id={roomTypeid} />
     </div>
   )
 }

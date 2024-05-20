@@ -17,7 +17,12 @@ const AddServiceModal = ({ isOpen, onClose }) => {
     formData.append('price', document.getElementById('price').value);
     formData.append('description', document.getElementById('description').value);
     formData.append('isDeleted', false);
-    formData.append('image', document.getElementById('image').files);
+    // formData.append('image', document.getElementById('image').files);
+    const files = document.getElementById('image').files;
+    for (let i = 0; i < files.length; i++) {
+      formData.append('imageFiles', files[i]);
+    }
+    //
     console.log(formData.get('name'));
 
     if (formData.get('name') === '' || formData.get('price') === '' || formData.get('salePercent') === '' || formData.get('description') === '') {
@@ -54,7 +59,7 @@ const AddServiceModal = ({ isOpen, onClose }) => {
   };
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} size='full'>
+      <Modal isOpen={isOpen} onClose={onClose} size='xl'>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Thêm dịch vụ mới</ModalHeader>

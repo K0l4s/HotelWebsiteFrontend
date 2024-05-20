@@ -1,0 +1,149 @@
+.roomInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 15px;
+    background: #dbdbdb;
+    color: black;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 10px #747474;
+}
+
+.roomInfo .roomContent{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.roomInfo .roomContent p{
+    font-size: 15px;
+    font-weight: bold;
+    margin: 10px;
+}
+.serviceItem{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+    cursor: pointer;
+    background: #dbdbdb;
+    color:black;
+    transition: all 0.3s ease-in-out;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.serviceItem__img img{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+}
+
+.serviceItem__info{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.serviceItem__info p{
+    font-size: 15px;
+    margin: 10px;
+}
+.pickRoom button{
+    padding: 10px;
+    border-radius: 10px;
+    background: #f39898;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.pickRoom button:hover{
+    background: #f26b6b;
+}
+.serviceItem__info .serviceContent{
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+}
+
+.serviceItem__info .amount{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.serviceItem__info .amount button{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin:10px;
+}
+
+.serviceItem__info .amount button:hover{
+    background: #747474;
+}
+
+.serviceItem__info .amount input{
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+    color:#e0e0e0;
+}
+
+.mainItems{
+    display: flex;
+    flex-direction: row;
+}
+.chooseService{
+    width: 100%;
+}
+.service{
+    width: 80%;
+}
+
+.paymentMethod{
+    width: 20%;
+}
+
+.chooseRoom{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.chooseRoom select{
+    width: 30%;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    margin: 10px;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #e0e0e0;
+}
+
+.chooseRoom select option{
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    background: black;
+}

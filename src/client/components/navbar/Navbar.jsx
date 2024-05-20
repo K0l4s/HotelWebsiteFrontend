@@ -30,11 +30,12 @@ const Navbar = () => {
         <button className={path === '/contact' ? 'active' : ''} onClick={() => navigate('/contact')}> <RiCustomerService2Fill /> Liên hệ</button>
         {username ?
           <>
-            <button className={path === '/profile' ? 'active' : ''} onClick={() => navigate('/profile')}> <TbLogin2 /> {'Xin chào, Trung Kiên'} </button>
-            <button className={path === '/order' ? 'active' : ''} onClick={() => navigate('/order')}><IoCreateOutline /> Order của bạn</button>
-            <button className={path === '/logout' ? 'active' : ''} onClick={signOut}><IoCreateOutline /> Đăng xuất</button>
+            {/* <button className={path === '/profile' ? 'active' : ''} onClick={() => navigate('/profile')}> <TbLogin2 /> {'Xin chào, Trung Kiên'} </button> */}
+            {/* <button className={path === '/order' ? 'active' : ''} onClick={() => navigate('/order')}><IoCreateOutline /> Order của bạn</button> */}
+           
             <button className={path === '/cart' ? 'active' : ''} onClick={() => navigate('/cart')}><IoCreateOutline /> Giỏ hàng</button>
-            <button>ADMIN</button>
+            <button onClick={()=>navigate("/admin")}>ADMIN</button>
+            <button className={path === '/logout' ? 'active' : ''} onClick={signOut}><IoCreateOutline /> Đăng xuất</button>
           </>
            : 
           <>
@@ -47,4 +48,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default Navbar;

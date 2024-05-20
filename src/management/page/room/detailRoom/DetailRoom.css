@@ -31,7 +31,7 @@
     box-shadow: 5px 5px 0 rgb(125, 125, 125);
     color:black;
 }
-h1{
+h2{
     font-size: 20px;
     font-weight: bold;
     margin: 10px;
@@ -94,7 +94,7 @@ h1{
 }
 
 .tableContent table tr:nth-child(even){
-    background: #f39898;
+    background: lightgray;
 }
 
 /* Hiệu ứng hover cho trường được chọn */
