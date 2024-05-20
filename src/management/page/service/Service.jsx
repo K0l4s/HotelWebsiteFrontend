@@ -7,7 +7,6 @@ import AddServiceModal from '../../components/modal/addService/AddServiceModal'
 const Service = () => {
     const toast = new useToast();
     const [serviceList, setServiceList] = useState([])
-
     useEffect(() => {
         getServiceData();
     }, [])

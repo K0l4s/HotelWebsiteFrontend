@@ -23,20 +23,11 @@ const AddBranchModal = ({isOpen, onClose,responseData}) => {
     }
     );
 
-  //   console.log(branch);
-  //   fetch(server+'/admin/branch/create', { method: 'POST', headers: { 'Content-Type': 'application/json' 
-  //   , 'Authorization': 'Basic ' + btoa(APIInformation.username + ":" + APIInformation.password)}, body: JSON.stringify(branch)
-  //  })
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     console.log(data);
-  //     onClose();
-    // });
   }
     
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} size='full'>
+      <Modal isOpen={isOpen} onClose={onClose} size='xs'>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Thêm chi nhánh mới</ModalHeader>

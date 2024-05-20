@@ -12,7 +12,7 @@ const RoomTag = (room) => {
                 <p>Giá: {formatPrice} / giờ</p>
                 <div className="actionGroup">
                     <button onClick={()=>navigate(`/room/${room.id}`)}>Chi tiết</button>
-                    <button>Chọn phòng</button>
+                    <button onClick={()=>navigate(`/picking/${room.id}`)}>Chọn phòng</button>
                 </div>
             </div>
         </div>

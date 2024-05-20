@@ -5,14 +5,25 @@ import axios from 'axios';
 import './DetailRoom.css'
 import { MdDeleteForever, MdEdit } from 'react-icons/md';
 import { FaEdit } from 'react-icons/fa';
+import AddRoomModal from '../../../components/modal/addRoom/AddRoomModal';
 const DetailRoom = () => {
     const navigate = useNavigate();
     const id = useParams().id;
-    const [currentLocation, setCurrentLocation] = useState('Chưa chọn chi nhánh');
+    const [currentLocation, setCurrentLocation] = useState('[Chưa chọn chi nhánh]');
 
     const [roomTypeInfo, setRoomTypeInfo] = useState([]);
     const [branchList, setBranchList] = useState([]);
     const [roomList, setRoomList] = useState([]);
+
+    const [isOpened, setIsOpened] = useState(false);
+    const [isEdit, setIsEdit] = useState(false);
+    const onCloseCreate = () => {
+        setIsOpened(false);
+        // Reload trang
+        window.location.reload();
+
+    }
+
     let price = 0;
     if (roomTypeInfo.priceEachRoom)
         price = roomTypeInfo.priceEachRoom.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -58,9 +69,9 @@ const DetailRoom = () => {
     return (
         <div className='roomType'>
             <div className="header">
-                <h1>Chi tiết loại phòng</h1>
+                <h2>Chi tiết loại phòng</h2>
                 <div className="buttonGroup">
-                <button>Đăng ký loại phòng cho chi nhánh</button>
+                <button onClick={()=>setIsOpened(true)}>Đăng ký loại phòng cho chi nhánh</button>
                     <button>Sửa</button>
                     <button>Xóa</button>
                     <button onClick={()=>navigate("/admin/room")}>Quay lại</button>
@@ -76,7 +87,7 @@ const DetailRoom = () => {
             </div>
             <div className="tableContent">
                 <div className='branch'>
-                    <h1>Các chi nhánh hỗ trợ phòng</h1>
+                    <h2>Các chi nhánh hỗ trợ phòng</h2>
                     <table >
                         <tr>
                             <th>ID</th>
@@ -118,7 +129,7 @@ const DetailRoom = () => {
                     </table>
                 </div>
                 <div className='roomByBranch'>
-                    <h1>Các phòng có trong chi nhánh {currentLocation}</h1>
+                    <h2>Các phòng có trong chi nhánh {currentLocation}</h2>
                     <table>
                         <tr>
                             <th>ID</th>
@@ -127,15 +138,27 @@ const DetailRoom = () => {
                             <th>Quản lý</th>
                         </tr>
                         {roomList.map((room, index) => (
-                            <tr key={index}>
+                            // Nếu room.status là đang isBooking thì background color màu xanh lá
+                            room.status === "isBooking"? 
+                                (<tr key={index} style={{backgroundColor: "red",fontWeight:"bold"}}>
                                 <td>{room.id}</td>
                                 <td>{room.number}</td>
-                                <td>{room.status}</td>
+                                <td>Đang có khách đặt</td>
                                 <td>
                                     <button><MdEdit/></button>
                                     <button><FaEdit/></button>
                                 </td>
-                            </tr>
+                            </tr>)
+                            :
+                            (<tr key={index}>
+                                <td>{room.id}</td>
+                                <td>{room.number}</td>
+                                <td>Phòng hiện đang trống</td>
+                                <td>
+                                    <button><MdEdit/></button>
+                                    <button><FaEdit/></button>
+                                </td>
+                            </tr>)
                         ))}
                         {/* Nếu không có roomList thì thông báo rỗng */}
                         {roomList.length === 0 ? (
@@ -146,7 +169,7 @@ const DetailRoom = () => {
                     </table>
                 </div>
             </div>
-
+            <AddRoomModal isOpen={isOpened} onClose={onCloseCreate} typeid={id} />
         </div>
     )
 }

@@ -6,7 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import { MdDeleteForever } from 'react-icons/md';
 import { FaEdit } from 'react-icons/fa';
 import { TbListDetails } from 'react-icons/tb';
+import AddRoomTypeModal from '../../components/modal/addRoomType/AddRoomTypeModal';
 const Room = () => {
+    const [isOpenRoomTypeModal, setIsOpenRoomTypeModal] = useState(false);
+    const onCloseRoomTypeModal = () => {
+        setIsOpenRoomTypeModal(false);
+        window.location.reload();
+    }
     const [roomTypes, setRoomTypes] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
@@ -25,7 +31,7 @@ const Room = () => {
   return (
     <div className='roomPage'>
         <h1>Loại phòng hiện có</h1>
-        <button>Thêm loại phòng mới</button>
+        <button onClick={()=>setIsOpenRoomTypeModal(true)}>Thêm loại phòng mới</button>
         <table>
             <tr>
                 <th>ID</th>
@@ -55,6 +61,7 @@ const Room = () => {
                 )
                 }
         </table>
+        <AddRoomTypeModal isOpen={isOpenRoomTypeModal} onClose={onCloseRoomTypeModal} />
     </div>
   )
 }
