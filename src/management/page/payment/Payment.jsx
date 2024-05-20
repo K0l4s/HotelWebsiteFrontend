@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import apiService from '../../../api/apiService';
 import './payment.css';
 import { useToast } from '@chakra-ui/react'
+import server from '../../../api/APIPath';
+import axios from 'axios';
 
 const Payment = () => {
   const toast = new useToast();
@@ -28,29 +30,54 @@ const Payment = () => {
   useEffect(() => {
     const fetchBranches = async () => {
       try {
-        const response = await apiService.get("/api/v1/management/branch/all", header);
-        setBranches(response.body);
+        // const response = await axios.get(server+"/api/v1/management/branch/all", header);
+        axios(
+          {
+            method: 'GET',
+            url: server + '/api/v1/management/branch/all',
+            headers: {
+              'Authorization': 'Bearer ' + token
+            }
+          }
+        ).then((response) => {
+          setBranches(response.data);
+          console.log(branches)
+        }).catch((error) => {
+          setError('Failed to fetch branches');
+        });
+
       } catch (err) {
         setError('Failed to fetch branches');
       }
-    };
 
-    fetchBranches();
+      fetchBranches();
+    }
   }, [token]);
 
   useEffect(() => {
     const fetchRoomTypes = async () => {
       try {
-        const response = await apiService.get("/api/v1/management/room-type/all", header);
-        setRoomTypes(response);
-      } catch (err) {
-        setError('Failed to fetch room types');
+        axios(
+          {
+            method: 'GET',
+            url: server + '/api/v1/management/room-type/all',
+            headers: {
+              'Authorization': 'Bearer ' + token
+            }
+          }
+        ).then((response) => {
+          setRoomTypes(response.data);
+        }).catch((error) => {
+          setError('Failed to fetch room types');
+        });
       }
-    };
+      catch (err) {
+        setError('Failed to fetch room types');
+      }}
 
     fetchRoomTypes();
   }, [token]);
-  
+
   useEffect(() => {
     if (shouldFetch) {
       const fetchRevenue = async () => {

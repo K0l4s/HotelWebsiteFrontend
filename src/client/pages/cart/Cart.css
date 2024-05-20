@@ -28,3 +28,14 @@
     border-radius: 5px;
     padding: 5px;
 }
+
+.carts h2{
+    color:white;
+}
+
+.carts button{
+    width: 150px;
+    background-color: rgb(0, 255, 34);
+    height: 50px;
+    font-weight: bold;
+}

@@ -54,24 +54,24 @@ const Service = () => {
 
     return (
         <div className='service'>
-            <h1>Biểu giá dịch vụ</h1>
-            <div className="searchbox">
+            <h2>Biểu giá dịch vụ</h2>
+            {/* <div className="searchbox">
                 <input type="text" placeholder="Tìm kiếm dịch vụ" />
                 <img src="https://static-00.iconduck.com/assets.00/search-icon-2048x2048-zik280t3.png" alt="search_icon" />
-            </div>
-            <div className="button">
+            </div> */}
+            {/* <div className="button">
                 <button onClick={getService} className='showMore'>Trang trước</button>
                 <button className='showMore'>Trang sau</button>
-            </div>
+            </div> */}
             <div className="serviceTagGroup">
                 {Array.isArray(service) && service.map((item, index) => (
                     <ServiceTag key={index} service={item} />
                 ))}
             </div>
-            <div className="button">
-                <button className='showMore'>Trang trước</button>
-                <button className='showMore'>Trang sau</button>
-            </div>
+            {/* <div className="button"> */}
+                {/* <button className='showMore'>Trang trước</button> */}
+                {/* <button className='showMore'>Trang sau</button> */}
+            {/* </div> */}
         </div>
     );
 };

@@ -25,3 +25,16 @@
     border-radius: 5px;
     cursor: pointer;
 }
+
+.booking h2{
+    text-align: center;
+    padding: 20px;
+    font-size: 50px;
+    font-weight: bold;
+    color:white;
+}
+
+.booking p{
+    text-align: center;
+    color:white;
+}

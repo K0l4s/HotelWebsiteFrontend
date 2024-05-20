@@ -4,8 +4,10 @@ import axios from 'axios';
 import RoomTag from '../../components/roomTag/RoomTag';
 import server from '../../../api/APIPath';
 import { useToast } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
+  const navigate = useNavigate();
   const toast = useToast();
   const [cartItems, setCartItems] = useState([]);
 
@@ -57,9 +59,9 @@ const Cart = () => {
     )
   }
   return (
-    <div>
-      <h1>Giỏ hàng của bạn</h1>
-      <button>Đặt phòng ngay</button>
+    <div className='carts'>
+      <h2>Giỏ hàng của bạn</h2>
+      <button onClick={()=>navigate("/booking")}>Đặt phòng ngay</button>
       <div className="cartItems">
       {cartItems.map((item) => (
         <div className='items'>

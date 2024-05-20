@@ -55,7 +55,7 @@ const Booking = () => {
   }
   return (
     <div className='booking'>
-      <h1>Đặt phòng</h1>
+      <h2>Đặt phòng</h2>
       <p>Danh sách phòng hiện có</p>
       <div className="roomList">
         {rooms.map((room) => (
