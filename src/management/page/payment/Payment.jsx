@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import apiService from '../../../api/apiService';
 import './payment.css';
+import { useToast } from '@chakra-ui/react'
 
 const Payment = () => {
+  const toast = new useToast();
+
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [branchId, setBranchId] = useState('');
@@ -10,6 +13,8 @@ const Payment = () => {
   const [revenue, setRevenue] = useState(null);
   const [error, setError] = useState('');
   const [shouldFetch, setShouldFetch] = useState(false);
+  const [branches, setBranches] = useState([]);
+  const [roomTypes, setRoomTypes] = useState([]);
 
   const token = localStorage.getItem('access_token');
 
@@ -17,32 +22,51 @@ const Payment = () => {
     setShouldFetch(true);
   };
 
+  const header = {
+    Authorization: `Bearer ${token}`,
+  }
+  useEffect(() => {
+    const fetchBranches = async () => {
+      try {
+        const response = await apiService.get("/api/v1/management/branch/all", header);
+        setBranches(response.body);
+      } catch (err) {
+        setError('Failed to fetch branches');
+      }
+    };
+
+    fetchBranches();
+  }, [token]);
+
+  useEffect(() => {
+    const fetchRoomTypes = async () => {
+      try {
+        const response = await apiService.get("/api/v1/management/room-type/all", header);
+        setRoomTypes(response);
+      } catch (err) {
+        setError('Failed to fetch room types');
+      }
+    };
+
+    fetchRoomTypes();
+  }, [token]);
+  
   useEffect(() => {
     if (shouldFetch) {
       const fetchRevenue = async () => {
         try {
           setError('');
-          const formData = new FormData();
-          formData.append('startDate', startDate);
-          formData.append('endDate', endDate);
-          if (branchId) formData.append('branchId', branchId);
-          if (roomTypeId) formData.append('roomTypeId', roomTypeId);
 
-          const response = await axios({
-            method: 'GET',
-            url: '/api/v1/management/payment/revenue',
-            headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'multipart/form-data',
-            },
-            params: {
-              startDate,
-              endDate,
-              branchId: branchId || null,
-              roomTypeId: roomTypeId || null,
-            },
-          });
-          setRevenue(response.data.body);
+          const params = {
+            startDate,
+            endDate,
+            branchId: branchId || undefined,
+            roomTypeId: roomTypeId || undefined,
+          };
+
+          // Gọi API bằng phương thức get của apiService
+          const response = await apiService.getWithParam('/api/v1/management/payment/revenue', params, header);
+          setRevenue(response.body);
         } catch (err) {
           setError('Failed to calculate revenue');
           setRevenue(null);
@@ -75,20 +99,26 @@ const Payment = () => {
         />
       </div>
       <div className="form-group">
-        <label>Branch ID (Optional):</label>
-        <input
-          type="number"
-          value={branchId}
-          onChange={(e) => setBranchId(e.target.value)}
-        />
+        <label>Branch (Optional):</label>
+        <select value={branchId} onChange={(e) => setBranchId(e.target.value)}>
+          <option value="">Select Branch</option>
+          {branches.map(branch => (
+            <option key={branch.id} value={branch.id}>
+              {branch.location}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="form-group">
-        <label>Room Type ID (Optional):</label>
-        <input
-          type="number"
-          value={roomTypeId}
-          onChange={(e) => setRoomTypeId(e.target.value)}
-        />
+        <label>Room type (Optional):</label>
+        <select value={roomTypeId} onChange={(e) => setRoomTypeId(e.target.value)}>
+          <option value="">Select room type</option>
+          {roomTypes.map(roomType => (
+            <option key={roomType.id} value={roomType.id}>
+              {roomType.name}
+            </option>
+          ))}
+        </select>
       </div>
       <button onClick={handleCalculate}>Calculate Revenue</button>
       {error && <div className="error-message">{error}</div>}

@@ -25,6 +25,16 @@ class ApiService {
       this.handleError(error);
     }
   }
+
+  async getWithParam(url, params = {}, headers = {}) {
+    try {
+      const response = await this.api.get(backendApi+url, { headers , params});
+      return response.data;
+    } catch (error) {
+      this.handleError(error);
+    }
+  }
+
   async getNoBackend(url, headers = {}) {
     try {
       const response = await this.api.get(url, { headers : headers });
