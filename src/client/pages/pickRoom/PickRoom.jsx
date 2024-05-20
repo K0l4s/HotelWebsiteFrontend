@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import './PickRoom.css';
 import axios from 'axios';
 import server from '../../../api/APIPath';
@@ -21,9 +21,11 @@ const PickRoom = () => {
     const [totalPay, setTotalPay] = useState(0);
 
     const toast = useToast();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const initialize = async () => {
+            fetchService();
             await fetchRoomType();
             await fetchBranches();
             if (selectedBranch) {
@@ -138,13 +140,21 @@ const PickRoom = () => {
                 alert('Vui lòng chọn đầy đủ thông tin');
                 return;
             }
-            const serviceIds = choosenService.map(service => service.id);
+            // const serviceIds = choosenService.map(service => service.id);
+            // Nếu service trong choosenService có amount lớn hơn 1 thì thêm vào serviceIds số service id tương ứng với amout
+            const serviceIds = choosenService.reduce((acc, service) => {
+                for (let i = 0; i < service.amount; i++) {
+                    acc.push(service.id);
+                }
+                return acc;
+            }, []);
+            console.log(serviceIds);
             const data = {
                 roomId: selectedRoom,
                 checkIn: checkIn,
                 checkOut: checkOut,
                 paymentMethod: paymentMethod,
-                // serviceIds.length >0 && serviceIds: serviceIds
+                serviceIds: serviceIds,
                 total_money: totalPay
             };
             const header = {
@@ -163,6 +173,12 @@ const PickRoom = () => {
                     duration: 9000,
                     isClosable: true,
                 });
+                if(paymentMethod==='card'){
+                    navigate(`/payment/${response.data.paymentid}`);
+                }else
+                {
+                    navigate(`/payment/${response.data.paymentid}`);
+                }
             }).catch((error) => {
                 console.log(error);
             });

@@ -3,6 +3,11 @@ import './ServiceBox.css'
 import axios from 'axios';
 import server from '../../../api/APIPath';
 const ServiceBox = (service) => {
+    let thumbnail = "https://media.istockphoto.com/id/480125692/photo/sunset-summer-hcm-city.jpg?s=612x612&w=0&k=20&c=5vtajrIKJzZhv1B0aSJW88maZsmYFP0hFd7w4pEocLM="
+    // = service.service.thumbnail;
+    if(service.service.imageURLs.length > 0){
+        thumbnail = service.service.imageURLs[0];
+    }
     console.log(service);
     // Chuẩn hoá price thành dạng .000.000
     const price = service.service.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -24,7 +29,7 @@ const ServiceBox = (service) => {
   return (
     <div className='serviceBox'>
         <div className="serviceBoxRight">
-            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg" alt="" />
+            <img src={thumbnail} alt="" />
         </div>
         <div className="ServiceBoxContent">
             <h3>Tên: {service.service.name}</h3>

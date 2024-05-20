@@ -2,7 +2,7 @@
     background: #a0a0a0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
     margin-top: 20px;
     /* width: 50%; */
     margin: 10px;

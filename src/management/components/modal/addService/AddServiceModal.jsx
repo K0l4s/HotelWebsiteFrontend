@@ -17,7 +17,12 @@ const AddServiceModal = ({ isOpen, onClose }) => {
     formData.append('price', document.getElementById('price').value);
     formData.append('description', document.getElementById('description').value);
     formData.append('isDeleted', false);
-    formData.append('image', document.getElementById('image').files);
+    // formData.append('image', document.getElementById('image').files);
+    const files = document.getElementById('image').files;
+    for (let i = 0; i < files.length; i++) {
+      formData.append('imageFiles', files[i]);
+    }
+    //
     console.log(formData.get('name'));
 
     if (formData.get('name') === '' || formData.get('price') === '' || formData.get('salePercent') === '' || formData.get('description') === '') {

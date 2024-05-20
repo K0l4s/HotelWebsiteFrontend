@@ -3,8 +3,15 @@ import AddBranch from '../../components/modal/addBranch/AddBranch'
 import './Branch.css'
 import axios from 'axios'
 import server from '../../../api/APIPath'
+import UpdateBranchModal from '../../components/modal/updateBranch/UpdateBranchModal'
 const Branch = () => {
     const [branchList, setBranchList] = useState([])
+    const [isUpdateBranch, setIsUpdateBranch] = useState(false)
+    const [branchId, setBranchId] = useState('')
+    const onCloseUpdateBranch = () => {setIsUpdateBranch(false);
+    getBranchList();
+    }
+
     useEffect(() => {
         getBranchList()
     }, [])
@@ -58,11 +65,11 @@ const Branch = () => {
                         <th>Địa chỉ</th>
                         <th>Thao tác</th>
                     </tr>
-                    <tr>
+                    {/* <tr>
                         <th></th>
                         <th><input placeholder='113, Lê Thánh Tông' /></th>
                         <th><button>Lọc danh sách</button></th>
-                    </tr>
+                    </tr> */}
                 </thead>
 
                 <tbody>
@@ -78,8 +85,9 @@ const Branch = () => {
                                 <td>
                                     <button onClick={()=>deleteBranch(branch.id)}>Xoá chi nhánh</button>
                                     {/* <button onClick={hideBranch(branch.id)}>Ẩn Chi Nhánh</button> */}
-                                    <button>Quản lý doanh thu</button>
-                                    <button>Quản lý chi tiết</button>
+                                    <button onClick={()=>{setIsUpdateBranch(true);setBranchId(branch.id)}}>Cập nhật thông tin</button>
+                                    {/* <button>Quản lý doanh thu</button>
+                                    <button>Quản lý chi tiết</button> */}
                                 </td>
                             </tr>
                         ))
@@ -87,7 +95,7 @@ const Branch = () => {
                 </tbody>
             </table>
             </div>
-            <div className="moreGroup">
+            {/* <div className="moreGroup">
                 <button>Hiển thị thêm</button>
                 <p>Đang hiển thị 100/500 chi nhánh</p>
             </div>
@@ -106,8 +114,9 @@ const Branch = () => {
                     <option>4</option>
                     <option>5</option>
                 </select>
-            </div>
+            </div> */}
             <AddBranch isOpen={isOpenAddBranch} onClose={onCloseAddBranch} />
+            <UpdateBranchModal isOpen={isUpdateBranch} onClose={onCloseUpdateBranch} branchid={branchId}/>
         </div>
     )
 }

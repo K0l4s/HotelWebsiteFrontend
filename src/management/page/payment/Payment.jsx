@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './payment.css';
+import server from '../../../api/APIPath';
 
 const Payment = () => {
   const [startDate, setStartDate] = useState('');
@@ -30,7 +31,7 @@ const Payment = () => {
 
           const response = await axios({
             method: 'GET',
-            url: '/api/v1/management/payment/revenue',
+            url: server+'/api/v1/management/payment/revenue',
             headers: {
               'Authorization': `Bearer ${token}`,
               'Content-Type': 'multipart/form-data',
