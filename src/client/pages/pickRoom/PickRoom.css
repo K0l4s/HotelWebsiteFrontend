@@ -60,7 +60,7 @@
     font-size: 15px;
     margin: 10px;
 }
-.serviceItem__info button{
+.pickRoom button{
     padding: 10px;
     border-radius: 10px;
     background: #f39898;
@@ -69,6 +69,9 @@
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+}
+.pickRoom button:hover{
+    background: #f26b6b;
 }
 .serviceItem__info .serviceContent{
     display: flex;

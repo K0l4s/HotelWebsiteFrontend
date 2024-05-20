@@ -3,24 +3,36 @@ import { useParams } from 'react-router-dom';
 import './PickRoom.css';
 import axios from 'axios';
 import server from '../../../api/APIPath';
-import { Input } from '@chakra-ui/react';
+import { Input, useToast } from '@chakra-ui/react';
 
 const PickRoom = () => {
     const [roomList, setRoomList] = useState([]);
     const [branchAvailable, setBranchAvailable] = useState([]);
     const [serviceList, setServiceList] = useState([]); // [id, name, price, description, image]
-    const [choosenService, setChoosenService] = useState([]); // [id, name, price, description, image, amount
+    const [choosenService, setChoosenService] = useState([]); // [id, name, price, description, image, amount]
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
+    const [selectedBranch, setSelectedBranch] = useState('');
+    const [selectedRoom, setSelectedRoom] = useState('');
+    const [paymentMethod, setPaymentMethod] = useState('');
     const roomid = useParams().roomid;
     const [roomType, setRoomType] = useState({});
     const [price, setPrice] = useState(0);
+    const [totalPay, setTotalPay] = useState(0);
+
+    const toast = useToast();
+
     useEffect(() => {
-        fetchRoomType();
-        fetchBranches();
-        fetchService();
-        setDefaultDates();
-    }, []);
+        const initialize = async () => {
+            await fetchRoomType();
+            await fetchBranches();
+            if (selectedBranch) {
+                await fetchRooms(selectedBranch);
+            }
+            setDefaultDates();
+        };
+        initialize();
+    }, [selectedBranch]);
 
     const setDefaultDates = () => {
         const now = new Date();
@@ -34,85 +46,188 @@ const PickRoom = () => {
     const fetchBranches = async () => {
         try {
             const response = await axios.get(`${server}/api/v1/branch/findByRoomType/${roomid}`);
-            // console.log(response.data);
             setBranchAvailable(response.data);
+            setSelectedBranch(response.data[0].id);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     };
 
     const fetchRooms = async (branchid) => {
         try {
-            console.log(branchid)
-            const response = await axios.get(server + `/api/v1/room/available?checkIn=${checkIn}&checkOut=${checkOut}&branchId=${branchid}&roomTypeId=${roomid}`);
-            // console.log(response.data);
+            const response = await axios.get(`${server}/api/v1/room/available?checkIn=${checkIn}&checkOut=${checkOut}&branchId=${branchid}&roomTypeId=${roomid}`);
             setRoomList(response.data);
+            setSelectedRoom(response.data[0].id);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     };
+
     const fetchRoomType = async () => {
         try {
-            const response = await axios.get(server + `/api/v1/room-type/${roomid}`);
+            const response = await axios.get(`${server}/api/v1/room-type/${roomid}`);
             setRoomType(response.data);
             setPrice(response.data.priceEachRoom.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); // format price
-            // console.log(response.data);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
-    }
+    };
+
     const fetchService = async () => {
         try {
-            const response = await axios.get(server + `/api/v1/service/all?pageNo=0&pageSize=5&sortBy=id&sortDir=asc`);
+            const response = await axios.get(`${server}/api/v1/service/all?pageNo=0&pageSize=5&sortBy=id&sortDir=asc`);
             setServiceList(response.data.body.content);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const addServiceToChoose = (service) => {
+        const existingService = choosenService.find(item => item.id === service.id);
+        if (existingService) {
+            existingService.amount += 1;
+            setChoosenService([...choosenService]);
+        } else {
+            service.amount = 1;
+            setChoosenService([...choosenService, service]);
+        }
+    };
+
+    const deleteService = (service) => {
+        const newService = choosenService.filter(item => item.id !== service.id);
+        setChoosenService(newService);
+    };
+
+    const addAmount = (service) => {
+        const newService = choosenService.map(item => {
+            if (item.id === service.id) {
+                item.amount += 1;
+            }
+            return item;
+        });
+        setChoosenService(newService);
+    };
+
+    const deleteAmount = (service) => {
+        const newService = choosenService.map(item => {
+            if (item.id === service.id) {
+                item.amount = Math.max(item.amount - 1, 0);
+            }
+            return item;
+        }).filter(item => item.amount > 0);
+        setChoosenService(newService);
+    };
+
+    useEffect(() => {
+        let total = choosenService.reduce((sum, service) => sum + service.price * service.amount, 0);
+        setTotalPay(total);
+    }, [choosenService]);
+
+    const createBill = async () => {
+        try {
+            if (!localStorage.getItem('access_token')) {
+                alert('Vui lòng đăng nhập để thực hiện chức năng này');
+                return;
+            }
+            console.log(checkIn, checkOut, selectedRoom, paymentMethod, totalPay);
+            if (!checkIn || !checkOut) {
+                alert('Vui lòng chọn ngày checkin và checkout');
+                return;
+            }
+            if (!selectedRoom || !paymentMethod) {
+                alert('Vui lòng chọn đầy đủ thông tin');
+                return;
+            }
+            const serviceIds = choosenService.map(service => service.id);
+            const data = {
+                roomId: selectedRoom,
+                checkIn: checkIn,
+                checkOut: checkOut,
+                paymentMethod: paymentMethod,
+                // serviceIds.length >0 && serviceIds: serviceIds
+                total_money: totalPay
+            };
+            const header = {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+                }
+            };
+            const response = await axios.post(`${server}/api/booking/reserveRoom`, data, {
+                headers: header.headers
+            }).then((response) => {
+                console.log(response.data);
+                toast({
+                    title: 'Success',
+                    description: 'Đặt phòng thành công',
+                    status: 'success',
+                    duration: 9000,
+                    isClosable: true,
+                });
+            }).catch((error) => {
+                console.log(error);
+            });
             console.log(response.data);
         } catch (error) {
-            console.log(error);
+            const errorMessage = error.response?.data?.message || 'Vui lòng chọn đầy đủ thông tin hoặc xem lại thông tin đã chọn';
+            toast({
+                title: 'Error',
+                description: errorMessage,
+                status: 'error',
+                duration: 9000,
+                isClosable: true,
+            });
         }
-    }
-    const addServiceToChoose = (service) => {
-        setChoosenService([...choosenService, service]);
-    }
+    };
+
     return (
-        <div>
+        <div className='pickRoom'>
             <div className="roomInfo">
-                <h1>Phòng bạn đang chọn</h1>
+                <h2>Phòng bạn đang chọn</h2>
                 <div className="roomContent">
                     <p>Room id: {roomid}</p>
                     <p>Loại phòng: {roomType.name}</p>
-                    <p>Giá thuê: {price}vnđ/giờ</p>
-                    <p>Room acreare: {roomType.acreage} m²</p>
+                    <p>Giá thuê: {price} vnđ/giờ</p>
+                    <p>Room acreage: {roomType.acreage} m²</p>
                 </div>
                 <div className='chooseRoom'>
-                    <h1>Chọn chi nhánh</h1>
-                    <select id='branch' onChange={(e) => fetchRooms(e.target.value)}>
+                    <h2>Chọn chi nhánh</h2>
+                    <select id='branch' onChange={(e) => {
+                        setSelectedBranch(e.target.value);
+                        fetchRooms(e.target.value);
+                    }}>
                         {branchAvailable.map((branch) => (
                             <option key={branch.id} value={branch.id}>{branch.location}</option>
                         ))}
                     </select>
-                    <h1>Chọn Phòng</h1>
-                    <select>
+                    <h2>Chọn Phòng</h2>
+                    <select onChange={(e) => {setSelectedRoom(e.target.value);console.log(e.target.value)}}>
                         {roomList.map((item) => (
                             <option key={item.id} value={item.id}>{item.number}</option>
                         ))}
                     </select>
                 </div>
                 <div className="chooseRoom">
-                    <h1>CheckIn</h1>
+                    <h2>CheckIn</h2>
                     <Input
                         id='checkIn'
                         value={checkIn}
-                        onChange={(e) => { setCheckIn(e.target.value); fetchRooms(document.getElementById('branch').value) }}
+                        onChange={(e) => { 
+                            setCheckIn(e.target.value); 
+                            if (selectedBranch) fetchRooms(selectedBranch); 
+                        }}
                         backgroundColor={'grey'}
                         placeholder='Select Date and Time'
                         size='md'
                         type='datetime-local'
                     />
-                    <h1>Checkout</h1>
+                    <h2>Checkout</h2>
                     <Input
                         id='checkOut'
                         value={checkOut}
-                        onChange={(e) => { setCheckOut(e.target.value); fetchRooms(document.getElementById('branch').value) }}
+                        onChange={(e) => { 
+                            setCheckOut(e.target.value); 
+                            if (selectedBranch) fetchRooms(selectedBranch); 
+                        }}
                         backgroundColor={'grey'}
                         placeholder='Select Date and Time'
                         size='md'
@@ -123,9 +238,9 @@ const PickRoom = () => {
 
             <div className="mainItems">
                 <div className="service">
-                    <h1>Các dịch vụ chọn kèm</h1>
+                    <h2>Các dịch vụ chọn kèm</h2>
                     <div className="chooseService">
-                        <h1>Chọn thêm dịch vụ</h1>
+                        <h2>Chọn thêm dịch vụ</h2>
                         {choosenService.map((service) => (
                             <div className="serviceItem" key={service.id}>
                                 <div className="serviceItem__img">
@@ -137,19 +252,19 @@ const PickRoom = () => {
                                         <p>Giá: {service.price}</p>
                                         <p>Mô tả: {service.description}</p>
                                         <div className="amount">
-                                            <button>+</button>
-                                            <input type="number" value={service.amount} />
-                                            <button>-</button>
+                                            <button onClick={() => addAmount(service)}>+</button>
+                                            <input type="number" value={service.amount} readOnly />
+                                            <button onClick={() => deleteAmount(service)}>-</button>
                                         </div>
                                     </div>
-                                    <button>Xóa</button>
+                                    <button onClick={() => deleteService(service)}>Xóa</button>
                                 </div>
                             </div>
                         ))}
                     </div>
 
                     <div className="chooseService">
-                        <h1>Chọn thêm dịch vụ</h1>
+                        <h2>Chọn thêm dịch vụ</h2>
                         {serviceList.map((service) => (
                             <div className="serviceItem" key={service.id}>
                                 <div className="serviceItem__img">
@@ -161,24 +276,24 @@ const PickRoom = () => {
                                         <p>Giá: {service.price}</p>
                                         <p>Mô tả: {service.description}</p>
                                     </div>
-                                    <button onClick={()=>addServiceToChoose(service)}>Thêm</button>
+                                    <button onClick={() => addServiceToChoose(service)}>Thêm</button>
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
                 <div className="paymentMethod">
-                    <h1>Chọn phương thức thanh toán</h1>
+                    <h2>Chọn phương thức thanh toán</h2>
                     <div className="paymentItem">
-                        <p>Tổng số tiền giao dịch: 500.000</p>
-                        <input type="radio" name="payment" id="cash" value="cash" />
-                        <label htmlFor="cash">Thanh toán tiền mặt</label>
+                        <p>Tổng số tiền giao dịch: {totalPay} vnđ</p>
+                        <input type="radio" name="payment" id="CASH" value="cash" onChange={(e) => setPaymentMethod(e.target.value)} />
+                        <label htmlFor="CASH">Thanh toán tiền mặt</label>
                     </div>
                     <div className="paymentItem">
-                        <input type="radio" name="payment" id="card" value="card" />
-                        <label htmlFor="card">Thanh toán qua thẻ</label>
+                        <input type="radio" name="payment" id="CARD" value="card" onChange={(e) => setPaymentMethod(e.target.value)} />
+                        <label htmlFor="CARD">Thanh toán qua thẻ</label>
                     </div>
-                    <button>Thanh toán</button>
+                    <button onClick={() => createBill()}>Thanh toán</button>
                 </div>
             </div>
         </div>

@@ -68,7 +68,7 @@ const Booking = () => {
             <div className="room-details">
               <div className="image-container">
                 <img
-                  src={require(`C:/ThuongMai/HotelWebsiteFrontend/src/management/page/booking/PHONGVIP1.jpg`)}
+                  src={require(`../booking/PHONGVIP1.jpg`)}
                   alt={selectedRoom.name}
                   className="room-image-details"
                 />

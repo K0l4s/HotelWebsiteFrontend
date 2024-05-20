@@ -29,7 +29,7 @@ const User = () => {
                         <div key={user.id} className="user-card">
                             <div className="image-container">
                                 <img
-                                    src={require(`C:/ThuongMai/HotelWebsiteFrontend/src/management/page/user/PHONGVIP1.jpg`)}
+                                    src={require(`./PHONGVIP1.jpg`)}
                                     alt={user.name}
                                     className="user-image"
                                 />
@@ -46,7 +46,7 @@ const User = () => {
                         <div className="user-details">
                             <div className="image-container">
                                 <img
-                                    src={require(`C:/ThuongMai/HotelWebsiteFrontend/src/management/page/user/PHONGVIP1.jpg`)}
+                                    src={require(`./PHONGVIP1.jpg`)}
                                     alt={selectedUser.name}
                                     className="user-image-details"
                                 />
