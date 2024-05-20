@@ -24,6 +24,7 @@ import PickRoom from '../client/pages/pickRoom/PickRoom';
 import Payment from '../management/page/payment/Payment';
 import BookingAdnin from '../management/page/booking/Booking';
 import User from '../management/page/user/User';
+import PaymentClient from '../client/pages/paymentClient/PaymentClient';
 
 const Router = () => {
   const [navIsOpen, setNavIsOpen] = useState(true);
@@ -75,6 +76,7 @@ const Router = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/confirm-register/:email" element={<ConfirmAccount />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/payment/:id" element={<PaymentClient />} />
           <Route path="/*" element={<><h1>404 not found</h1> <p>Tính năng đang được bảo trì hoặc phát triển!</p></>} />
         </Routes>
         <div className="cart" onClick={() => navigate("/cart")}>

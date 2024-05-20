@@ -23,9 +23,19 @@ const PickRoom = () => {
     const toast = useToast();
     const navigate = useNavigate();
 
+    const calculateTotalPay = () => {
+        let total = 0;
+        let duration = (new Date(checkOut) - new Date(checkIn)) / 1000 / 60 / 60; // hours
+        total += duration * price;
+        choosenService.forEach(service => {
+            total += parseInt(service.price, 10) * service.amount;
+        });
+        setTotalPay(total);
+    };
+
     useEffect(() => {
         const initialize = async () => {
-            fetchService();
+            await fetchService();
             await fetchRoomType();
             await fetchBranches();
             if (selectedBranch) {
@@ -34,7 +44,23 @@ const PickRoom = () => {
             setDefaultDates();
         };
         initialize();
-    }, [selectedBranch]);
+    }, []);
+
+    useEffect(() => {
+        if (selectedBranch) {
+            fetchRooms(selectedBranch).then(() => {
+                // console.log('fetch room success');
+                console.log(selectedBranch);
+            }).catch((error) => {
+                console.error(error);
+            });
+
+        }
+    }, [checkIn, checkOut, selectedBranch]);
+
+    useEffect(() => {
+        calculateTotalPay();
+    }, [checkIn, checkOut, choosenService, price]);
 
     const setDefaultDates = () => {
         const now = new Date();
@@ -49,7 +75,9 @@ const PickRoom = () => {
         try {
             const response = await axios.get(`${server}/api/v1/branch/findByRoomType/${roomid}`);
             setBranchAvailable(response.data);
-            setSelectedBranch(response.data[0].id);
+            if (response.data.length > 0) {
+                setSelectedBranch(response.data[0].id);
+            }
         } catch (error) {
             console.error(error);
         }
@@ -59,7 +87,11 @@ const PickRoom = () => {
         try {
             const response = await axios.get(`${server}/api/v1/room/available?checkIn=${checkIn}&checkOut=${checkOut}&branchId=${branchid}&roomTypeId=${roomid}`);
             setRoomList(response.data);
-            setSelectedRoom(response.data[0].id);
+            if (response.data.length > 0) {
+                setSelectedRoom(response.data[0].id);
+            } else {
+                setSelectedRoom('');
+            }
         } catch (error) {
             console.error(error);
         }
@@ -69,7 +101,7 @@ const PickRoom = () => {
         try {
             const response = await axios.get(`${server}/api/v1/room-type/${roomid}`);
             setRoomType(response.data);
-            setPrice(response.data.priceEachRoom.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); // format price
+            setPrice(response.data.priceEachRoom);
         } catch (error) {
             console.error(error);
         }
@@ -120,18 +152,12 @@ const PickRoom = () => {
         setChoosenService(newService);
     };
 
-    useEffect(() => {
-        let total = choosenService.reduce((sum, service) => sum + service.price * service.amount, 0);
-        setTotalPay(total);
-    }, [choosenService]);
-
     const createBill = async () => {
         try {
             if (!localStorage.getItem('access_token')) {
                 alert('Vui lòng đăng nhập để thực hiện chức năng này');
                 return;
             }
-            console.log(checkIn, checkOut, selectedRoom, paymentMethod, totalPay);
             if (!checkIn || !checkOut) {
                 alert('Vui lòng chọn ngày checkin và checkout');
                 return;
@@ -140,15 +166,14 @@ const PickRoom = () => {
                 alert('Vui lòng chọn đầy đủ thông tin');
                 return;
             }
-            // const serviceIds = choosenService.map(service => service.id);
-            // Nếu service trong choosenService có amount lớn hơn 1 thì thêm vào serviceIds số service id tương ứng với amout
+
             const serviceIds = choosenService.reduce((acc, service) => {
                 for (let i = 0; i < service.amount; i++) {
                     acc.push(service.id);
                 }
                 return acc;
             }, []);
-            console.log(serviceIds);
+
             const data = {
                 roomId: selectedRoom,
                 checkIn: checkIn,
@@ -157,15 +182,16 @@ const PickRoom = () => {
                 serviceIds: serviceIds,
                 total_money: totalPay
             };
+
             const header = {
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('access_token')
                 }
             };
+
             const response = await axios.post(`${server}/api/booking/reserveRoom`, data, {
                 headers: header.headers
             }).then((response) => {
-                console.log(response.data);
                 toast({
                     title: 'Success',
                     description: 'Đặt phòng thành công',
@@ -173,16 +199,10 @@ const PickRoom = () => {
                     duration: 9000,
                     isClosable: true,
                 });
-                if(paymentMethod==='card'){
-                    navigate(`/payment/${response.data.paymentid}`);
-                }else
-                {
-                    navigate(`/payment/${response.data.paymentid}`);
-                }
+                navigate(`/payment/${response.data.paymentid}`);
             }).catch((error) => {
                 console.log(error);
             });
-            console.log(response.data);
         } catch (error) {
             const errorMessage = error.response?.data?.message || 'Vui lòng chọn đầy đủ thông tin hoặc xem lại thông tin đã chọn';
             toast({
@@ -209,14 +229,13 @@ const PickRoom = () => {
                     <h2>Chọn chi nhánh</h2>
                     <select id='branch' onChange={(e) => {
                         setSelectedBranch(e.target.value);
-                        fetchRooms(e.target.value);
                     }}>
                         {branchAvailable.map((branch) => (
                             <option key={branch.id} value={branch.id}>{branch.location}</option>
                         ))}
                     </select>
                     <h2>Chọn Phòng</h2>
-                    <select onChange={(e) => {setSelectedRoom(e.target.value);console.log(e.target.value)}}>
+                    <select onChange={(e) => { setSelectedRoom(e.target.value); console.log(e.target.value); }}>
                         {roomList.map((item) => (
                             <option key={item.id} value={item.id}>{item.number}</option>
                         ))}
@@ -227,10 +246,7 @@ const PickRoom = () => {
                     <Input
                         id='checkIn'
                         value={checkIn}
-                        onChange={(e) => { 
-                            setCheckIn(e.target.value); 
-                            if (selectedBranch) fetchRooms(selectedBranch); 
-                        }}
+                        onChange={(e) => setCheckIn(e.target.value)}
                         backgroundColor={'grey'}
                         placeholder='Select Date and Time'
                         size='md'
@@ -240,10 +256,7 @@ const PickRoom = () => {
                     <Input
                         id='checkOut'
                         value={checkOut}
-                        onChange={(e) => { 
-                            setCheckOut(e.target.value); 
-                            if (selectedBranch) fetchRooms(selectedBranch); 
-                        }}
+                        onChange={(e) => setCheckOut(e.target.value)}
                         backgroundColor={'grey'}
                         placeholder='Select Date and Time'
                         size='md'
@@ -301,7 +314,7 @@ const PickRoom = () => {
                 <div className="paymentMethod">
                     <h2>Chọn phương thức thanh toán</h2>
                     <div className="paymentItem">
-                        <p>Tổng số tiền giao dịch: {totalPay} vnđ</p>
+                        <p>Tổng số tiền giao dịch: {totalPay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} vnđ</p>
                         <input type="radio" name="payment" id="CASH" value="cash" onChange={(e) => setPaymentMethod(e.target.value)} />
                         <label htmlFor="CASH">Thanh toán tiền mặt</label>
                     </div>

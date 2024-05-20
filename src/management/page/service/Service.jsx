@@ -7,7 +7,6 @@ import AddServiceModal from '../../components/modal/addService/AddServiceModal'
 const Service = () => {
     const toast = new useToast();
     const [serviceList, setServiceList] = useState([])
-    const [thumb,setThumb] = useState("https://media.istockphoto.com/id/480125692/photo/sunset-summer-hcm-city.jpg?s=612x612&w=0&k=20&c=5vtajrIKJzZhv1B0aSJW88maZsmYFP0hFd7w4pEocLM=")
     useEffect(() => {
         getServiceData();
     }, [])
