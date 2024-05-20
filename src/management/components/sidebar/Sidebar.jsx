@@ -7,12 +7,12 @@ const Sidebar = () => {
         <div className='side'>
             <div className="buttonGroup">
                 <button>Dashboard</button>
-                <button>Booking</button>
-                <button>User</button>
+                <button onClick={()=>navigate("/admin/booking")}>Booking</button>
+                <button onClick={()=>navigate("/admin/user")}>User</button>
                 <button onClick={()=>navigate("/admin/room")}>Room</button>
                 <button onClick={()=>navigate("/admin/payment")}>Payment</button>
                 <button onClick={()=>navigate("/admin/service")}>Service</button>
-                <button>History</button>
+                <button onClick={()=>navigate("/admin/history")}>History</button>
                 <button onClick={()=>navigate("/admin/branch")}>Branch</button>
             </div>
         </div>
