@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/HotelWebsiteFrontend/static/css/main.9964758a.css",
-    "main.js": "/HotelWebsiteFrontend/static/js/main.c176609f.js",
+    "main.css": "/HotelWebsiteFrontend/static/css/main.d6445fbb.css",
+    "main.js": "/HotelWebsiteFrontend/static/js/main.d0a5cfe5.js",
     "static/js/787.65975d94.chunk.js": "/HotelWebsiteFrontend/static/js/787.65975d94.chunk.js",
+    "static/media/PHONGVIP1.jpg": "/HotelWebsiteFrontend/static/media/PHONGVIP1.4aaa898b9959f5ff57ee.jpg",
     "index.html": "/HotelWebsiteFrontend/index.html",
-    "main.9964758a.css.map": "/HotelWebsiteFrontend/static/css/main.9964758a.css.map",
-    "main.c176609f.js.map": "/HotelWebsiteFrontend/static/js/main.c176609f.js.map",
+    "main.d6445fbb.css.map": "/HotelWebsiteFrontend/static/css/main.d6445fbb.css.map",
+    "main.d0a5cfe5.js.map": "/HotelWebsiteFrontend/static/js/main.d0a5cfe5.js.map",
     "787.65975d94.chunk.js.map": "/HotelWebsiteFrontend/static/js/787.65975d94.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9964758a.css",
-    "static/js/main.c176609f.js"
+    "static/css/main.d6445fbb.css",
+    "static/js/main.d0a5cfe5.js"
   ]
 }
